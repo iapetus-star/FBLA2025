@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lessons - Cosmic Classroom</title>
+<style>
+/* GLOBAL STYLES */
+  body {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    background: #0a0f24;
+    color: white;
+    overflow-x: hidden;
+  }
+
+  a {
+    text-decoration: none;
+    color: white;
+  }
+
+  h1, h2, h3 {
+    margin: 0;
+  }
+
+/* NAVBAR */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background: rgba(0,0,0,0.4);
+    backdrop-filter: blur(8px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  nav .logo {
+    font-size: 26px;
+    font-weight: 700;
+    color: #6ab9ff;
+  }
+
+  nav ul {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+  }
+
+  nav ul li a:hover {
+    color: #6ab9ff;
+  }
+
+/* PAGE HEADER */
+  .page-header {
+    padding: 60px 40px 20px 40px;
+    text-align: center;
+  }
+
+  .page-header h1 {
+    font-size: 50px;
+    color: #6ab9ff;
+    margin-bottom: 10px;
+  }
+
+  .page-header p {
+    font-size: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+    color: #ccc;
+  }
+
+/* LESSON CARDS */
+  .card-grid {
+    display: grid;
+    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    padding: 40px;
+  }
+
+  .card {
+    background: #11172f;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.7);
+    transition: 0.3s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    background: #1a2340;
+  }
+
+  .card img {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 15px;
+  }
+
+  .card h3 {
+    color: #6ab9ff;
+    margin-bottom: 10px;
+  }
+
+  .card p {
+    flex-grow: 1;
+    color: #ccc;
+  }
+
+  .card .btn {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background: #6ab9ff;
+    border-radius: 5px;
+    color: black;
+    font-weight: 600;
+    text-align: center;
+    transition: 0.2s;
+    display: inline-block;
+  }
+
+  .card .btn:hover {
+    background: white;
+  }
+
+/* FOOTER */
+  footer {
+    text-align: center;
+    padding: 40px;
+    margin-top: 40px;
+    background: #080b17;
+    font-size: 14px;
+    color: #8ca0c7;
+  }
+
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="logo">Cosmic Classroom</div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="dashboard.html">Videos</a></li>
+    <li><a href="#">Lessons</a></li>
+    <li><a href="videos.html">Videos</a></li>
+    <li><a href="quizzes.html">Quizzes</a></li>
+    <li><a href="schedule.html">Study Sessions</a></li>
+    <li><a href="resources.html">Resources</a></li>
+  </ul>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <h1>Lessons</h1>
+    <p>Explore our student-friendly astronomy lessons. Click any lesson to start learning and take a quiz afterward!</p>
+</div>
+
+<!-- LESSON CARDS -->
+<div class="card-grid">
+
+ <!-- Lesson 1 -->
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1532298488760-70e57e4f41b0?auto=format&fit=crop&w=800&q=80" alt="Solar System">
+    <h3>🪐 The Solar System</h3>
+    <p>Learn about the Sun, planets, moons, and other celestial bodies that make up our solar system.</p>
+    <a class="btn" href="lesson-solar-system.html">Take Quiz</a>
+  </div>
+
+ <!-- Lesson 2 -->
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80" alt="Stars and Galaxies">
+    <h3>🌌 Stars & Galaxies</h3>
+    <p>Discover how stars are born, live, and die, and explore the vast galaxies in the universe.</p>
+    <a class="btn" href="lesson-stars.html">Take Quiz</a>
+  </div>
+
+ <!-- Lesson 3 -->
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1504712598893-24159a89200e?auto=format&fit=crop&w=800&q=80" alt="Black Holes">
+    <h3>🕳 Black Holes</h3>
+    <p>Understand these mysterious regions of space where gravity is so strong that nothing can escape.</p>
+    <a class="btn" href="lesson-blackholes.html">Take Quiz</a>
+  </div>
+
+ <!-- Lesson 4 -->
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1473187983305-f615310e7daa?auto=format&fit=crop&w=800&q=80" alt="Space Technology">
+    <h3>🚀 Space Technology</h3>
+    <p>Learn about rockets, satellites, telescopes, and the technology that lets us explore space.</p>
+    <a class="btn" href="lesson-tech.html">Take Quiz</a>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  Cosmic Classroom © 2025 — Built by Students, for Students
+</footer>
+
+</body>
+</html>
