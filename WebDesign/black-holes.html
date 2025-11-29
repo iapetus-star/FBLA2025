@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Black Holes - Cosmic Classroom</title>
+
+<style>
+
+  body {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    background: #0a0f24;
+    color: white;
+    overflow-x: hidden;
+  }
+
+  a {
+    text-decoration: none;
+    color: white;
+  }
+
+  h1,h2,h3 {
+    margin: 0;
+  }
+
+  img {
+    max-width: 100%;
+    border-radius: 10px;
+  }
+
+/* Navbar */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background: rgba(0,0,0,0.4);
+    backdrop-filter: blur(8px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  nav .logo {
+    font-size: 26px;
+    font-weight: 700;
+    color: #6ab9ff;
+    }
+
+  nav ul {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+  }
+
+  nav ul li a:hover {
+    color: #6ab9ff;
+  }
+
+/* Hero / Banner */
+  .hero {
+    background: url('https://images.unsplash.com/photo-1517949908112-4b0b37b25b8f?auto=format&fit=crop&w=1400&q=80') 
+    center/cover no-repeat;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 60px;
+    box-shadow: inset 0 0 200px black;
+  }
+
+  .hero h1 {
+    font-size: 50px;
+    text-shadow: 0 0 20px black;
+    color: #6ab9ff;
+  }
+
+  .hero p {
+    font-size: 20px;
+    margin-top: 10px;
+    text-shadow: 0 0 10px black;
+  }
+
+/* Content */
+  .section {
+    padding: 60px 40px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .section h2 {
+    color: #6ab9ff;
+    margin-bottom: 20px;
+    font-size: 32px;
+  }
+
+  .section p {
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: #ccc;
+  }
+
+  .images-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin: 30px 0;
+  }
+
+/* Fun Fact */
+  .fun-fact {
+    background: #1a2340;
+    padding: 25px;
+    border-left: 5px solid #6ab9ff;
+    margin-top: 40px;
+    border-radius: 8px;
+    font-size: 18px;
+  }
+
+/* Button */
+  .btn {
+    display: inline-block;
+    padding: 12px 25px;
+    background: #6ab9ff;
+    border-radius: 5px;
+    color: black;
+    font-weight: 600;
+    margin-top: 20px;
+    transition: 0.2s;
+  }
+
+  .btn:hover {
+    background: white;
+  }
+
+/* Footer */
+  footer {
+    text-align: center;
+    padding: 40px;
+    margin-top: 40px;
+    background: #080b17;
+    font-size: 14px;
+    color: #8ca0c7;
+  }
+
+</style>
+
+</head>
+<body>
+
+<!-- Navbar -->
+<nav>
+  <div class="logo">Cosmic Classroom</div>
+    <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="dashboard.html">Dashboard</a></li>
+    <li><a href="lessons.html">Lessons</a></li>
+    <li><a href="videos.html">Videos</a></li>
+    <li><a href="quizzes.html">Quizzes</a></li>
+    <li><a href="schedule.html">Study Sessions</a></li>
+    <li><a href="resources.html">Resources</a></li>
+    </ul>
+</nav>
+
+<!-- Hero / Banner -->
+<div class="hero">
+  <h1>Black Holes</h1>
+    <p>Explore the mysterious and powerful objects in space that warp time and gravity.</p>
+</div>
+
+<!-- Lesson Content -->
+<div class="section">
+  <h2>Introduction</h2>
+    <p>Black holes are regions in space where gravity is so strong that nothing, not even light, can escape. They form when massive stars collapse at the end of their life cycle.</p>
+
+    <div class="images-row">
+      <img src="https://images.unsplash.com/photo-1509228627152-8f22f0ef6c6b?auto=format&fit=crop&w=400&q=80" alt="Black Hole">
+      <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=400&q=80" alt="Space">
+      <img src="https://images.unsplash.com/photo-1518991791751-1530a6f47b7a?auto=format&fit=crop&w=400&q=80" alt="Event Horizon">
+    </div>
+
+  <h2>How They Form</h2>
+    <p>Most black holes are formed when massive stars run out of fuel and their cores collapse under gravity. The resulting singularity is surrounded by an event horizon, beyond which nothing can return.</p>
+
+  <h2>Types of Black Holes</h2>
+    <p>Black holes can be stellar, formed from a single star; supermassive, located at the center of galaxies; or intermediate, which are less common. Each type affects surrounding space differently.</p>
+
+<!-- Fun Fact -->
+  <div class="fun-fact">
+    🌟 <strong>Fun Fact:</strong> The supermassive black hole at the center of our galaxy is called Sagittarius A* and has a mass 4 million times that of the Sun!
+  </div>
+
+<!-- Take Quiz Button -->
+    <a class="btn" href="quiz-blackholes.html">Take the Black Holes Quiz</a>
+</div>
+
+<!-- Footer -->
+<footer>
+  Cosmic Classroom © 2025 — Built by Students, for Students
+</footer>
+
+</body>
+</html>
