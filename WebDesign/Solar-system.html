@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Solar System - Cosmic Classroom</title>
+
+<style>
+
+/* GLOBAL STYLES */
+  body {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    background: #0a0f24;
+    color: white;
+    overflow-x: hidden;
+  }
+
+  a {
+    text-decoration: none;
+    color: white;
+  }
+
+  h1, h2, h3 {
+    margin: 0;
+  }
+
+  img {
+    max-width: 100%;
+    border-radius: 10px;
+  }
+
+/* NAVBAR */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background: rgba(0,0,0,0.4);
+    backdrop-filter: blur(8px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  nav .logo {
+    font-size: 26px;
+    font-weight: 700;
+    color: #6ab9ff;
+  }
+
+  nav ul {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+  }
+
+  nav ul li a:hover {
+    color: #6ab9ff;
+  }
+
+/* HERO / BANNER */
+  .hero {
+  background: url('https://media.istockphoto.com/id/111834966/photo/planets-of-the-solar-system-in-orbit.jpg?s=612x612&w=0&k=20&c=8A8pMwcyjJT4whUKPZsLfcY7vCuJL0Th2RjbALLp6f4=')
+    center/cover no-repeat;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 60px;
+    box-shadow: inset 0 0 200px black;
+  }
+
+  .hero h1 {
+    font-size: 50px;
+    text-shadow: 0 0 20px black;
+    color: #6ab9ff;
+  }
+
+  .hero p {
+    font-size: 20px;
+    margin-top: 10px;
+    text-shadow: 0 0 10px black;
+  }
+
+/* ------------------- CONTENT ------------------- */
+  .section {
+    padding: 60px 40px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .section h2 {
+    color: #6ab9ff;
+    margin-bottom: 20px;
+    font-size: 32px;
+  }
+
+  .section p {
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: #ccc;
+  }
+
+  .images-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin: 30px 0;
+  }
+
+/* FUN FACT */
+  .fun-fact {
+    background: #1a2340;
+    padding: 25px;
+    border-left: 5px solid #6ab9ff;
+    margin-top: 40px;
+    border-radius: 8px;
+    font-size: 18px;
+  }
+
+/* BUTTON */
+  .btn {
+    display: inline-block;
+    padding: 12px 25px;
+    background: #6ab9ff;
+    border-radius: 5px;
+    color: black;
+    font-weight: 600;
+    margin-top: 20px;
+    transition: 0.2s;
+  }
+
+  .btn:hover {
+    background: white;
+  }
+
+/* FOOTER */
+  footer {
+    text-align: center;
+    padding: 40px;
+    margin-top: 40px;
+    background: #080b17;
+    font-size: 14px;
+    color: #8ca0c7;
+  }
+
+
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="logo">Cosmic Classroom</div>
+    <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="dashboard.html">Dashboard</a></li>
+    <li><a href="lessons.html">Lessons</a></li>
+    <li><a href="videos.html">Videos</a></li>
+    <li><a href="quizzes.html">Quizzes</a></li>
+    <li><a href="schedule.html">Study Sessions</a></li>
+    <li><a href="resources.html">Resources</a></li>
+    </ul>
+</nav>
+
+<!-- HERO / BANNER -->
+<div class="hero">
+  <h1>The Solar System</h1>
+    <p>Explore our Sun, planets, moons, and other celestial objects in the Solar System.</p>
+</div>
+
+<!-- LESSON CONTENT -->
+<div class="section">
+  <h2>Introduction</h2>
+    <p>The Solar System is made up of the Sun and all the objects that orbit it, including planets, moons, asteroids, and comets. Each planet has unique features, and together they form a fascinating cosmic neighborhood.</p>
+
+    <div class="images-row">
+      <img src="https://plus.unsplash.com/premium_photo-1717793692180-9646b97c5b33?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDZ8fHxlbnwwfHx8fHw%3D" alt="Planets">
+      <img src="https://images.unsplash.com/photo-1481819613568-3701cbc70156?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8cGxhbmV0fGVufDB8fDB8fHww" alt="Moon">
+      <img src="https://t3.ftcdn.net/jpg/02/51/61/58/240_F_251615815_aaL6qbmZ9YW17RBaDykdJKDrqiTvsveI.jpg" alt="Sun">
+    </div>
+
+  <h2>Planets Overview</h2>
+    <p>The eight planets are divided into inner rocky planets (Mercury, Venus, Earth, Mars) and outer gas giants (Jupiter, Saturn, Uranus, Neptune). Each has its own atmosphere, surface conditions, and interesting moons.</p>
+
+  <h2>Other Objects</h2>
+    <p>Beyond the planets, the Solar System contains asteroids, comets, and the Kuiper Belt. These smaller objects are remnants from the formation of the Solar System and can tell us a lot about its history.</p>
+
+<!-- Fun Fact -->
+  <div class="fun-fact">
+    🌟 <strong>Fun Fact:</strong> Jupiter is so large that more than 1,300 Earths could fit inside it!
+  </div>
+
+<!-- Take Quiz Button -->
+    <a class="btn" href="quiz-solar-system.html">Take the Solar System Quiz</a>
+</div>
+
+<!-- ------------------- FOOTER ------------------- -->
+<footer>
+  Cosmic Classroom © 2025 — Built by Students, for Students
+</footer>
+
+</body>
+</html>
