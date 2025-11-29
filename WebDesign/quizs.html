@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quizzes - Cosmic Classroom</title>
+<style>
+  body {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    background: #0a0f24;
+    color: white;
+    overflow-x: hidden;
+  }
+
+  a {
+    text-decoration: none;
+    color: white;
+  }
+
+  h1, h2, h3 {
+    margin: 0;
+  }
+
+/* Navbar */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background: rgba(0,0,0,0.4);
+    backdrop-filter: blur(8px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  nav .logo {
+    font-size: 26px;
+    font-weight: 700;
+    color: #6ab9ff;
+  }
+
+  nav ul {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+  }
+
+  nav ul li a:hover {
+    color: #6ab9ff;
+  }
+
+/* Hero / Banner */
+  .hero {
+    background: url('https://images.unsplash.com/photo-1504712598893-24159a89200e?auto=format&fit=crop&w=1400&q=80')
+    center/cover no-repeat;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 60px;
+    box-shadow: inset 0 0 200px black;
+  }
+
+  .hero h1 {
+    font-size: 50px;
+    text-shadow: 0 0 20px black;
+    color: #6ab9ff;
+  }
+
+  .hero p {
+    font-size: 20px;
+    margin-top: 10px;
+    text-shadow: 0 0 10px black;
+  }
+
+/* Section */
+  .section {
+    padding: 60px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section h2 {
+    color: #6ab9ff;
+    margin-bottom: 30px;
+    font-size: 32px;
+    text-align: center;
+  }
+
+/* Quiz Grid */
+  .quiz-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+  }
+
+  .quiz-card {
+    background: #11172f;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.7);
+    transition: 0.3s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .quiz-card:hover {
+    transform: translateY(-5px);
+    background: #1a2340;
+  }
+
+  .quiz-card h3 {
+    margin-bottom: 10px;
+    color: #6ab9ff;
+  }
+
+  .quiz-card p {
+    margin-bottom: 15px;
+    color: #ccc;
+  }
+
+  .quiz-card .btn {
+    display: inline-block;
+    padding: 12px 25px;
+    background: #6ab9ff;
+    border-radius: 5px;
+    color: black;
+    font-weight: 600;
+    text-align: center;
+    transition: 0.2s;
+  }
+
+  .quiz-card .btn:hover {
+   background: white;
+  }
+
+/* Footer */
+  footer {
+    text-align: center;
+    padding: 40px;
+    margin-top: 40px;
+    background: #080b17;
+    font-size: 14px;
+    color: #8ca0c7;
+  }
+
+  @media(max-width:600px){
+    .hero {
+      padding-left: 30px;
+    }
+    .hero h1 {
+      font-size: 36px;
+    }
+
+    .hero p {
+    font-size: 16px;
+    }
+  }
+
+</style>
+
+</head>
+<body>
+
+<!-- Navbar -->
+<nav>
+  <div class="logo">Cosmic Classroom</div>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="lessons.html">Lessons</a></li>
+      <li><a href="videos.html">Videos</a></li>
+      <li><a href="#">Quizzes</a></li>
+      <li><a href="schedule.html">Study Sessions</a></li>
+      <li><a href="resources.html">Resources</a></li>
+    </ul>
+</nav>
+
+<!-- Hero -->
+<div class="hero">
+  <h1>Quizzes</h1>
+    <p>Test your knowledge on astronomy topics and challenge your friends!</p>
+</div>
+
+<!-- Section -->
+<div class="section">
+  <h2>Available Quizzes</h2>
+
+  <div class="quiz-grid">
+
+<!-- Quiz 1 -->
+    <div class="quiz-card">
+      <h3>The Solar System</h3>
+      <p>Test your knowledge on planets, moons, and the Sun!</p>
+      <a class="btn" href="quiz-solar-system.html">Start Quiz</a>
+    </div>
+
+<!-- Quiz 2 -->
+    <div class="quiz-card">
+      <h3>Stars & Galaxies</h3>
+      <p>Challenge yourself on stars, galaxies, and their life cycles.</p>
+      <a class="btn" href="quiz-stars.html">Start Quiz</a>
+    </div>
+
+ <!-- Quiz 3 -->
+    <div class="quiz-card">
+      <h3>Black Holes</h3>
+      <p>How much do you know about black holes and event horizons?</p>
+      <a class="btn" href="quiz-blackholes.html">Start Quiz</a>
+    </div>
+
+<!-- Quiz 4 -->
+    <div class="quiz-card">
+      <h3>Space Technology</h3>
+      <p>Test your knowledge about rockets, satellites, and telescopes.</p>
+      <a class="btn" href="quiz-tech.html">Start Quiz</a>
+    </div>
+
+<!-- Quiz 5 -->
+    <div class="quiz-card">
+      <h3>Comets & Asteroids</h3>
+      <p>How well do you know these small, fascinating Solar System objects?</p>
+      <a class="btn" href="quiz-comets.html">Start Quiz</a>
+    </div>
+
+<!-- Quiz 6 -->
+    <div class="quiz-card">
+      <h3>Exoplanets</h3>
+      <p>Challenge yourself with questions about planets beyond our Solar System!</p>
+      <a class="btn" href="quiz-exoplanets.html">Start Quiz</a>
+    </div>
+
+  </div>
+</div>
+
+<!-- Footer -->
+<footer>
+  Cosmic Classroom © 2025 — Built by Students, for Students
+</footer>
+
+</body>
+</html>
