@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>School Lost & Found</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="webDevelopment/index.css">
+
+  <!-- Supabase JS CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <h1>School Lost & Found</h1>
+    <div class="nav-links">
+      <a href="#">Home</a>
+      <a href="lost">Lost Items</a>
+      <a href="fount.html">Found Items</a>
+      <a href="report.html">Report Item</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h2>Lost something at school?</h2>
+    <p>Report lost items or check what’s been found around campus.</p>
+
+    <div class="hero-buttons">
+      <a href="#" class="btn primary">🔍 I Lost Something</a>
+      <a href="#" class="btn secondary">📦 I Found Something</a>
+    </div>
+  </section>
+
+  <!-- RECENT ITEMS -->
+  <section class="recent">
+    <h3>Recent Items</h3>
+
+    <div id="items-grid" class="items-grid">
+      <!-- Items loaded from Supabase will appear here -->
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how-it-works">
+    <h3>How It Works</h3>
+
+    <div class="steps">
+      <div class="step">
+        <span>📝</span>
+        <p>Report a lost or found item</p>
+      </div>
+      <div class="step">
+        <span>📦</span>
+        <p>Items are stored in the main office</p>
+      </div>
+      <div class="step">
+        <span>🪪</span>
+        <p>Claim items with your school ID</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Glendale High School • Main Office</p>
+    <p>Office Hours: 7:30 AM – 3:30 PM</p>
+  </footer>
+
+  <!-- JS -->
+  <script src="webDevelopment/index.js"></script>
+</body>
+</html>
