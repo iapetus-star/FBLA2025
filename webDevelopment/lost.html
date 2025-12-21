@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lost Items | School Lost & Found</title>
+  <link rel="stylesheet" href="main.css" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <h1>School Lost & Found</h1>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="lost.html">Lost Items</a>
+      <a href="found.html">Found Items</a>
+      <a href="report.html">Report Item</a>
+    </div>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <section class="page-header">
+    <h2>Lost Items</h2>
+    <p>Items reported as lost by students and staff</p>
+  </section>
+
+  <!-- FILTERS -->
+  <section class="filters">
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="Search items..."
+      aria-label="Search lost items"
+    />
+
+    <select id="categoryFilter">
+      <option value="">All Categories</option>
+      <option value="Phone">Phone</option>
+      <option value="Clothing">Clothing</option>
+      <option value="Book">Book</option>
+      <option value="Bag">Bag</option>
+      <option value="Other">Other</option>
+    </select>
+
+    <select id="locationFilter">
+      <option value="">All Locations</option>
+      <option value="Cafeteria">Cafeteria</option>
+      <option value="Gym">Gym</option>
+      <option value="Bus">Bus</option>
+      <option value="Hallway">Hallway</option>
+      <option value="Classroom">Classroom</option>
+    </select>
+  </section>
+
+  <!-- ITEMS -->
+  <section class="recent">
+    <div id="itemsGrid" class="items-grid"></div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+  <p>
+    <strong>Glendale High School</strong><br>
+    Address: 6216 W glendale ave Az 85301<br>
+    Office Hours: 7:30–3:30
+  </p>
+
+  <p style="font-weight: bold; font-size: 1.1em; margin-top: 12px;">
+    This website was created for an FBLA competitive event and is not affiliated with the named school. 
+    Permission was obtained and approved prior to the creation of this site.
+  </p>
+  </footer>
+
+  <!-- SUPABASE -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="lost.js"></script>
+</body>
+</html>
