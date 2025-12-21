@@ -235,3 +235,22 @@ footer {
   color: var(--muted);
   border-top: 1px solid var(--border);
 }
+
+/* FOUND ITEMS NOTICE*/
+.notice {
+  max-width: 1100px;
+  margin: 1rem auto 0;
+  padding: 1rem;
+  background: #ECFEFF;
+  border: 1px solid #67E8F9;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: #0F172A;
+}
+
+/*  location label */
+.item-location {
+  font-size: 0.8rem;
+  color: #555;
+  margin-top: 0.25rem;
+}
