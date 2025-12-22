@@ -1,5 +1,5 @@
 // SUPABASE SETUP
-const SUPABASE_URL = "https://supabase.com/dashboard/project/aynvmshmrcxcccglxcdk";
+const SUPABASE_URL = "https://aynvmshmrcxcccglxcdk.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF5bnZtc2htcmN4Y2NjZ2x4Y2RrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjYyNzEzMjgsImV4cCI6MjA4MTg0NzMyOH0.JAShR_lIGbv7MVUaiMf5qm1ufEFTXbwL6Rs4R1CYL-M";
 
 
