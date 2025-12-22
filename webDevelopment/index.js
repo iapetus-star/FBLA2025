@@ -18,7 +18,7 @@ async function loadRecentItems() {
   const { data, error } = await supabaseClient
     .from("items")
     .select("*")
-    .order("created_at", { ascending: false })
+    .order("date_reported", { ascending: false }) 
     .limit(8);
 
   if (error) {
