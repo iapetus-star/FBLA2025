@@ -18,7 +18,6 @@ async function loadRecentItems() {
   const { data, error } = await supabaseClient
     .from("items")
     .select("*")
-    .eq("claimed", false) // // REMOVE IF YOU DON'T HAVE THIS COLUMN
     .order("created_at", { ascending: false })
     .limit(8);
 
