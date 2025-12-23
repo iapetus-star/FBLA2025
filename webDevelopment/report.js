@@ -3,8 +3,8 @@ const SUPABASE_URL = "https://aynvmshmrcxcccglxcdk.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF5bnZtc2htcmN4Y2NjZ2x4Y2RrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjYyNzEzMjgsImV4cCI6MjA4MTg0NzMyOH0.JAShR_lIGbv7MVUaiMf5qm1ufEFTXbwL6Rs4R1CYL-M";
 
 const supabaseClient = supabase.createClient(
-SUPABASE_URL,
-SUPABASE_ANON_KEY
+  SUPABASE_URL,
+  SUPABASE_ANON_KEY
 );
 
 // DOM ELEMENTS
@@ -15,6 +15,15 @@ const pageHeader = document.querySelector(".page-header h2");
 
 // MAX IMAGE SIZE (5MB)
 const MAX_IMAGE_SIZE = 5 * 1024 * 1024;
+
+// CATEGORY NAME → ID MAPPING
+const categoryMap = {
+  phone: 1,
+  clothing: 2,
+  book: 3,
+  bag: 4
+  other: 5
+};
 
 // DYNAMIC HEADER BASED ON TYPE
 reportTypeSelect.addEventListener("change", (e) => {
@@ -29,12 +38,13 @@ reportForm.addEventListener("submit", async (e) => {
   const reportType = reportTypeSelect.value; // "lost" or "found"
   const name = document.getElementById("name").value.trim();
   const category = document.getElementById("category").value;
+  const category_id = categoryMap[category] || null; // Map to ID
   const description = document.getElementById("description").value.trim() || null;
   const date = document.getElementById("date").value || null;
   const location = document.getElementById("location").value.trim() || null;
   const photoFile = document.getElementById("photo").files[0];
 
-  let imageUrl = null;
+  let photo_url = null;
 
   // IMAGE UPLOAD
   if (photoFile) {
@@ -60,7 +70,7 @@ reportForm.addEventListener("submit", async (e) => {
       return;
     }
 
-    // Get public URL automatically from Supabase
+    // Get public URL automatically
     const { publicUrl, error: urlError } = supabaseClient.storage
       .from("item-photos")
       .getPublicUrl(`public/${fileName}`);
@@ -71,19 +81,21 @@ reportForm.addEventListener("submit", async (e) => {
       return;
     }
 
-    imageUrl = publicUrl;
+    photo_url = publicUrl;
   }
 
   // INSERT INTO DATABASE
   const { error } = await supabaseClient.from("items").insert([{
-    type: reportType,
+    status: reportType,        // lost/found
     name,
-    category,
+    category_id,
     description,
-    date,
+    date_lost_found: date || null,
     location,
-    image_url: imageUrl,
-    status: "pending"
+    photo_url,
+    reported_by: null,
+    claimed_by: null,
+    deleted_at: null
   }]);
 
   if (error) {
@@ -92,7 +104,6 @@ reportForm.addEventListener("submit", async (e) => {
   } else {
     formMessage.textContent = `Item submitted as ${reportType}! Waiting for admin approval.`;
     reportForm.reset();
-    // Reset header back to Lost after submit
-    pageHeader.textContent = "Report Lost Item";
+    pageHeader.textContent = "Report Lost Item"; // reset header
   }
 });
