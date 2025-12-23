@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Report Item - School Lost & Found</title>
+  <link rel="stylesheet" href="main.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script src="js/report.js" defer></script>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <h1>School Lost & Found</h1>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="lost.html">Lost Items</a>
+      <a href="found.html">Found Items</a>
+      <a href="report-found.html">Report Item</a>
+    </div>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <header class="page-header">
+    <h2>Report Lost Item</h2>
+    <p>Fill out the form below to report a lost or found item. Admins will review and approve it before it shows up on the site.</p>
+  </header>
+
+  <!-- REPORT ITEM FORM -->
+  <form id="reportForm">
+    <label>
+      Report Type
+      <select id="reportType">
+        <option value="lost">Lost</option>
+        <option value="found">Found</option>
+      </select>
+    </label>
+
+    <label>
+      Item Name
+      <input type="text" id="name" required />
+    </label>
+
+    <label>
+      Category
+      <select id="category">
+        <option value="phone">📱 Phone</option>
+        <option value="clothing">👕 Clothing</option>
+        <option value="book">📘 Book</option>
+        <option value="bag">🎒 Bag</option>
+        <option value="other">Other</option>
+      </select>
+    </label>
+
+    <label>
+      Description
+      <textarea id="description"></textarea>
+    </label>
+
+    <label>
+      Date
+      <input type="date" id="date" />
+    </label>
+
+    <label>
+      Location
+      <input type="text" id="location" />
+    </label>
+
+    <label>
+      Upload Photo
+      <input type="file" id="photo" accept="image/*" />
+    </label>
+      <p>Please take any found items to the front office.</p>
+    <button type="submit">Submit</button>
+    <p id="formMessage"></p>
+  </form>
+
+</body>
+</html>
