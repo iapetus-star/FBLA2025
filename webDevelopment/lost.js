@@ -3,7 +3,7 @@ const SUPABASE_URL = "https://aynvmshmrcxcccglxcdk.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF5bnZtc2htcmN4Y2NjZ2x4Y2RrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjYyNzEzMjgsImV4cCI6MjA4MTg0NzMyOH0.JAShR_lIGbv7MVUaiMf5qm1ufEFTXbwL6Rs4R1CYL-M";
 
 
-const supabase = supabase.createClient(
+const supabaseClient = supabase.createClient(
   SUPABASE_URL,
   SUPABASE_ANON_KEY
 );
@@ -19,11 +19,11 @@ let allItems = [];
 
 // FETCH LOST ITEMS
 async function fetchLostItems() {
-  const { data, error } = await supabase
+  const { data, error } = await supabaseClient
     .from("items")
     .select("*")
     .eq("status", "lost")
-    .order("created_at", { ascending: false });
+    .order("date_reported", { ascending: false });
 
   if (error) {
     console.error("Error fetching items:", error);
