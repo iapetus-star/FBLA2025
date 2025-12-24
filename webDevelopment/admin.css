@@ -1,0 +1,109 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f5f7fa;
+  margin: 0;
+}
+
+.admin-header {
+  background: #2563eb;
+  color: white;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+button {
+  padding: 8px 12px;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.tabs {
+  display: flex;
+  background: white;
+  border-bottom: 1px solid #ddd;
+}
+
+.tabs button {
+  flex: 1;
+  background: none;
+  padding: 12px;
+}
+
+.tabs .active {
+  border-bottom: 3px solid #2563eb;
+  font-weight: bold;
+}
+
+.filters {
+  padding: 12px;
+  display: flex;
+  gap: 10px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+
+th, td {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+}
+
+.badge {
+  padding: 4px 8px;
+  border-radius: 5px;
+  font-size: 12px;
+}
+
+.pending {
+  background: #fde68a; 
+}
+
+.lost {
+  background: #fecaca; 
+  }
+
+.found { 
+  background: #bbf7d0;
+  }
+
+.claimed {
+  background: #e5e7eb;
+  }
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hidden {
+  display: none;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  width: 400px;
+  border-radius: 8px;
+}
+
+.modal-content label {
+  display: block;
+  margin-top: 10px;
+}
+
+.modal-actions {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+}
