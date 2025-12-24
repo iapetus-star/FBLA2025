@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Lost & Found – Admin</title>
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+
+<header class="admin-header">
+  <h1>Lost & Found — Admin Panel</h1>
+ B <div>
+    <button id="addItemBtn">+ Add Item</button>
+    <button id="logoutBtn">Logout</button>
+  </div>
+</header>
+
+<nav class="tabs">
+  <button class="active" data-status="all">All</button>
+  <button data-status="pending">Pending</button>
+  <button data-status="lost">Lost</button>
+  <button data-status="found">Found</button>
+  <button data-status="claimed">Claimed</button>
+</nav>
+
+<section class="filters">
+  <input id="searchInput" placeholder="Search items..." />
+  <select id="sortSelect">
+    <option value="newest">Newest</option>
+    <option value="oldest">Oldest</option>
+    <option value="az">A–Z</option>
+  </select>
+</section>
+
+<table>
+  <thead>
+    <tr>
+      <th>Photo</th>
+      <th>Item</th>
+      <th>Category</th>
+      <th>Date</th>
+      <th>Location</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody id="itemsTable"></tbody>
+</table>
+
+<!-- Modal -->
+<div id="modal" class="modal hidden">
+  <form id="itemForm" class="modal-content">
+    <h2 id="modalTitle">Edit Item</h2>
+
+    <input type="hidden" id="itemId" />
+
+    <label>Item Name</label>
+    <input id="title" required />
+
+    <label>Category</label>
+    <input id="category" />
+
+    <label>Description</label>
+    <textarea id="description"></textarea>
+
+    <label>Status</label>
+    <select id="status">
+      <option value="pending">Pending</option>
+      <option value="lost">Lost</option>
+      <option value="found">Found</option>
+      <option value="claimed">Claimed</option>
+    </select>
+
+    <label>Location</label>
+    <input id="location" />
+
+    <label>Date</label>
+    <input type="date" id="date_event" />
+
+    <label>
+      <input type="checkbox" id="visible" />
+      Visible on public site
+    </label>
+
+    <label>Image</label>
+    <input type="file" id="image" accept="image/*" />
+
+    <div class="modal-actions">
+      <button type="submit">Save</button>
+      <button type="button" id="cancelBtn">Cancel</button>
+    </div>
+  </form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="admin.js"></script>
+</body>
+</html>
