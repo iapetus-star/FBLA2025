@@ -71,8 +71,8 @@ function renderItems(items) {
 // FILTER LOGIC
 function applyFilters() {
   const search = searchInput.value.toLowerCase();
-  const category = categoryFilter.value;
-  const location = locationFilter.value;
+  const category = categoryFilter.value.toLowerCase();
+  const location = locationFilter.value.toLowerCase();
 
   const filtered = allItems.filter(item => {
     const matchesSearch =
@@ -80,10 +80,10 @@ function applyFilters() {
       (item.description || "").toLowerCase().includes(search);
 
     const matchesCategory =
-      !category || item.category === category;
+      !category || item.category?.toLowerCase() === category;
 
     const matchesLocation =
-      !location || item.location === location;
+      !location || item.location?.toLowerCase() === location;
 
     return matchesSearch && matchesCategory && matchesLocation;
   });
