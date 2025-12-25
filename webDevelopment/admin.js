@@ -57,30 +57,28 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.style.display = "block";
   }
 
-  // ADMIN ACCESS
-  async function checkAdminAccess() {
-    const { data: { session } } = await supabase.auth.getSession();
-    if (!session?.user) {
-      alert("Please log in.");
-      return checkSession();
-    }
+// ADMIN ACCESS
+async function checkAdminAccess() {
+  const { data: { session } } = await supabase.auth.getSession();
 
-    const { data: userData, error: userError } = await supabase
-      .from("users")
-      .select("role")
-      .eq("id", session.user.id)
-      .single();
-
-    if (userError || !userData || userData.role !== "admin") {
-      alert("Access denied.");
-      await supabase.auth.signOut();
-      return checkSession();
-    }
-
-    loginModal.classList.add("hidden");
-    adminContent.classList.remove("hidden");
-    await loadItems();
+  if (!session?.user) {
+    alert("Please log in.");
+    return checkSession();
   }
+
+  const isAdmin = session.user.app_metadata?.admin === true;
+
+  if (!isAdmin) {
+    alert("Access denied.");
+    await supabase.auth.signOut();
+    return checkSession();
+  }
+
+  // User is admin
+  loginModal.classList.add("hidden");
+  adminContent.classList.remove("hidden");
+  await loadItems();
+}
 
   // LOAD ITEMS
   async function loadItems() {
