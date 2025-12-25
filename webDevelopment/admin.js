@@ -133,8 +133,10 @@ async function checkAdminAccess() {
     description.value = item.description;
     status.value = item.status;
     locationInput.value = item.location;
-    date_event.value = item.date_event;
-    visible.checked = item.visible;
+    date_event.value = item.date_event
+    ? item.date_event.split("T")[0]
+    : "";
+visible.checked = item.visible;
     modal.classList.remove("hidden");
   };
 
