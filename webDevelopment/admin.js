@@ -90,7 +90,9 @@ async function checkAdminAccess() {
     if (currentStatus !== "all") items = items.filter(i => i.status === currentStatus);
 
     const search = searchInput.value.toLowerCase();
-    items = items.filter(i => i.title.toLowerCase().includes(search));
+    items = items.filter(i =>
+      (i.title ?? "").toLowerCase().includes(search)
+    );
 
     items.forEach(item => {
       const tr = document.createElement("tr");
