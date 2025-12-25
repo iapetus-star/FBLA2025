@@ -28,7 +28,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const status = document.getElementById("status");
   const locationInput = document.getElementById("location"); // avoid conflict with window.location
   const date_event = document.getElementById("date_event");
-  const visible = document.getElementById("visible");
 
   // LOGIN 
   loginForm.onsubmit = async e => {
@@ -91,24 +90,30 @@ async function checkAdminAccess() {
 
     const search = searchInput.value.toLowerCase();
     items = items.filter(i =>
-      (i.title ?? "").toLowerCase().includes(search)
+      (i.name ?? "").toLowerCase().includes(search)
     );
 
     items.forEach(item => {
       const tr = document.createElement("tr");
       tr.innerHTML = `
-        <td>${item.image_url ? `<img src="${item.image_url}" width="40" />` : ""}</td>
-        <td>${item.title}</td>
-        <td>${item.category || ""}</td>
-        <td>${item.date_event || ""}</td>
-        <td>${item.location || ""}</td>
-        <td><span class="badge ${item.status}">${item.status}</span></td>
         <td>
-          <button onclick="editItem('${item.id}')">Edit</button>
-          <button onclick="markClaimed('${item.id}')">Claimed</button>
-          <button onclick="deleteItem('${item.id}')">Delete</button>
-        </td>
-      `;
+        ${item.photo_url ? `<img src="${item.photo_url}" width="40" />` : ""}
+      </td>
+      <td>${item.name}</td>
+      <td>${item.category_id ?? ""}</td>
+      <td>${item.date_lost_found ?? ""}</td>
+      <td>${item.location ?? ""}</td>
+      <td>
+        <span class="badge ${item.status}">
+        ${item.status}
+        </span>
+      </td>
+      <td>
+        <button onclick="editItem('${item.id}')">Edit</button>
+        <button onclick="markClaimed('${item.id}')">Claimed</button>
+        <button onclick="deleteItem('${item.id}')">Delete</button>
+      </td>
+    `;
       table.appendChild(tr);
     });
   }
@@ -124,21 +129,22 @@ async function checkAdminAccess() {
   });
 
   // MODAL LOGIC
-  window.editItem = function(id) {
-    const item = allItems.find(i => i.id === id);
-    if (!item) return;
-    itemId.value = item.id;
-    title.value = item.title;
-    category.value = item.category;
-    description.value = item.description;
-    status.value = item.status;
-    locationInput.value = item.location;
-    date_event.value = item.date_event
-    ? item.date_event.split("T")[0]
+window.editItem = function(id) {
+  const item = allItems.find(i => i.id === id);
+  if (!item) return;
+
+  itemId.value = item.id;
+  title.value = item.name;
+  category.value = item.category_id ?? "";
+  description.value = item.description ?? "";
+  status.value = item.status;
+  locationInput.value = item.location ?? "";
+  date_event.value = item.date_lost_found
+    ? item.date_lost_found.split("T")[0]
     : "";
-visible.checked = item.visible;
-    modal.classList.remove("hidden");
-  };
+
+  modal.classList.remove("hidden");
+};
 
   document.getElementById("addItemBtn").onclick = () => {
     form.reset();
@@ -152,13 +158,12 @@ visible.checked = item.visible;
   form.onsubmit = async e => {
     e.preventDefault();
     const payload = {
-      title: title.value,
-      category: category.value,
-      description: description.value,
+      name: title.value.trim(),
+      description: description.value.trim(),
+      category_id: category.value || null,
       status: status.value,
-      location: locationInput.value,
-      date_event: date_event.value,
-      visible: visible.checked
+      location: locationInput.value.trim(),
+      date_lost_found: date_event.value || null
     };
 
     if (itemId.value) {
@@ -179,7 +184,10 @@ visible.checked = item.visible;
   };
 
   window.markClaimed = async function(id) {
-    await supabase.from("items").update({ status: "claimed", visible: false }).eq("id", id);
+    await supabase
+      .from("items")
+      .update({ status: "claimed", claimed_by: "admin" })
+      .eq("id", id);
     await loadItems();
   };
 
