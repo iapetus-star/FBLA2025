@@ -87,7 +87,12 @@ th, td {
 }
 
 .hidden {
-  display: none;
+  display: none !important;
+  pointer-events: none !important;
+}
+
+.modal {
+  z-index: 1000;
 }
 
 .modal-content {
