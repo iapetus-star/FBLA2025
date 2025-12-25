@@ -66,14 +66,6 @@ async function checkAdminAccess() {
     return checkSession();
   }
 
-  const isAdmin = session.user.app_metadata?.admin === true;
-
-  if (!isAdmin) {
-    alert("Access denied.");
-    await supabase.auth.signOut();
-    return checkSession();
-  }
-
   // User is admin
   loginModal.classList.add("hidden");
   adminContent.classList.remove("hidden");
