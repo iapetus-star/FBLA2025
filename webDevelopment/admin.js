@@ -10,25 +10,28 @@ let currentStatus = "all";
 
 // Admin Gate
 async function checkAdminAccess() {
-  const { data: { user } } = await supabase.auth.getUser();
+  const { data: { session }, error } = await supabase.auth.getSession();
 
-  if (!user) {
-    alert("Please log in");
-    location.href = "/";
-    return;
+  if (error || !session?.user) {
+    alert("Please log in.");
+    location.href = "/"; // redirect to login
+    return false;
   }
 
-  const { data } = await supabase
+  const { data: userData, error: userError } = await supabase
     .from("users")
-    .select("*")
-    .eq("email", user.email)
+    .select("role")
+    .eq("id", session.user.id)
     .single();
 
-  if (!data) {
-    alert("Access denied");
+  if (userError || !userData || userData.role !== "admin") {
+    alert("Access denied.");
     await supabase.auth.signOut();
     location.href = "/";
+    return false;
   }
+
+  return true;
 }
 
 // Load Items
@@ -42,7 +45,7 @@ async function loadItems() {
   renderItems();
 }
 
-// Render
+// Render Items Table
 function renderItems() {
   const table = document.getElementById("itemsTable");
   table.innerHTML = "";
@@ -54,13 +57,10 @@ function renderItems() {
   }
 
   const search = document.getElementById("searchInput").value.toLowerCase();
-  items = items.filter(i =>
-    i.title.toLowerCase().includes(search)
-  );
+  items = items.filter(i => i.title.toLowerCase().includes(search));
 
   items.forEach(item => {
     const tr = document.createElement("tr");
-
     tr.innerHTML = `
       <td>${item.image_url ? `<img src="${item.image_url}" width="40" />` : ""}</td>
       <td>${item.title}</td>
@@ -91,9 +91,18 @@ document.querySelectorAll(".tabs button").forEach(btn => {
 // Modal Logic
 const modal = document.getElementById("modal");
 const form = document.getElementById("itemForm");
+const itemId = document.getElementById("itemId");
+const title = document.getElementById("title");
+const category = document.getElementById("category");
+const description = document.getElementById("description");
+const status = document.getElementById("status");
+const location = document.getElementById("location");
+const date_event = document.getElementById("date_event");
+const visible = document.getElementById("visible");
 
 function editItem(id) {
   const item = allItems.find(i => i.id === id);
+  if (!item) return;
   itemId.value = item.id;
   title.value = item.title;
   category.value = item.category;
@@ -161,6 +170,8 @@ document.getElementById("logoutBtn").onclick = async () => {
 
 // Init
 (async () => {
-  await checkAdminAccess();
+  const isAdmin = await checkAdminAccess();
+  if (!isAdmin) return; // stop loading if not admin
+  document.body.style.display = "block"; // show page
   await loadItems();
 })();
