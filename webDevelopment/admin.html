@@ -6,6 +6,20 @@
   <link rel="stylesheet" href="admin.css" />
 </head>
 <body>
+<body style="display: none;">
+  <!-- Login Modal -->
+  <div id="loginModal" class="modal">
+    <div class="modal-content">
+      <h2>Admin Login</h2>
+      <form id="loginForm">
+        <label>Email</label>
+        <input type="email" id="loginEmail" required />
+        <label>Password</label>
+        <input type="password" id="loginPassword" required />
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  </div>
 
 <header class="admin-header">
   <h1>Lost & Found — Admin Panel</h1>
