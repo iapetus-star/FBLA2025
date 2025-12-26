@@ -20,16 +20,10 @@ let allItems = [];
 function getImageUrl(photoPath) {
   if (!photoPath) return "";
 
-  const { data, error } = supabaseClient.storage
+  const { data } = supabaseClient.storage
     .from("item-photos")
     .getPublicUrl(photoPath);
 
-  if (error) {
-    console.error("Error getting public URL:", error);
-    return "";
-  }
-
-  console.log("Public URL:", data.publicUrl); // Debug URL
   return data.publicUrl;
 }
 
@@ -69,9 +63,9 @@ function renderItems(items) {
     card.className = "item-card";
 
     card.innerHTML = `
-      <div class="item-image">
-      <img src="${item.imageUrl || 'items/placeholder.jpg'}" alt="${item.name || 'Item image'}">
-      </div>
+      <div class="item-image" style="
+        background-image: url('${item.imageUrl || ""}');
+      "></div>
 
       <h4>${item.name}</h4>
       <span class="badge found">Found</span>
