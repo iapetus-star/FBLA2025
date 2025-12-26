@@ -63,11 +63,9 @@ function renderItems(items) {
     card.className = "item-card";
 
     card.innerHTML = `
-      <div class="item-image" style="
-        background-image: url('${item.imageUrl || ""}');
-        background-size: cover;
-        background-position: center;
-      "></div>
+      <div class="item-image">
+      <img src="${item.imageUrl || 'items/placeholder.jpg'}" alt="${item.name || 'Item image'}">
+      </div>
 
       <h4>${item.name}</h4>
       <span class="badge found">Found</span>
