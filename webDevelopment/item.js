@@ -91,7 +91,7 @@ function renderItem(item) {
     </div>
 
     <div class="item-description">
-      ${item.description ? capitalizeWords(item.description) : || "No description provided."}
+      ${item.description ? capitalizeWords(item.description) : "No description provided."}
     </div>
 
     <div class="info-box">
