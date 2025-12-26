@@ -67,9 +67,9 @@ function renderItem(item) {
       : "This item has already been claimed.";
 
   container.innerHTML = `
-    <div class="item-detail-image">
-      <img src="${item.imageUrl || 'items/placeholder.jpg'}" alt="${item.name || 'Item image'}">
-    </div>
+    <div class="item-detail-image" style="
+      background-image: url('${item.imageUrl || ""}');
+    "></div>
 
     <h2>${item.name}</h2>
     <div class="badge ${item.status}">${statusText}</div>
