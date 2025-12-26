@@ -66,7 +66,7 @@ function renderItems(items) {
 
     card.innerHTML = `
       <div class="item-image">
-      <img src="${imageUrl}" alt="${item.name || "Item image"}">
+      <img src="${item.imageUrl || 'items/placeholder.jpg'}" alt="${item.name || 'Item image'}">
       </div>
 
       <h4>${item.name}</h4>
