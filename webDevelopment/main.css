@@ -381,3 +381,58 @@ form button:hover {
   text-align: center;
 }
 
+/*ITEM IMAGES (GRID & DETAIL)*/
+
+/* GRID IMAGES (thumbnails inside item cards) */
+.item-image {
+  width: 100%;
+  height: 0;
+  padding-top: 75%; /* 4:3 aspect ratio */
+  background-color: #E5E7EB;
+  border-radius: 6px;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.15s ease;
+}
+
+.item-card:hover .item-image {
+  transform: scale(1.03);
+}
+
+/* DETAIL IMAGE */
+.item-detail-image {
+  width: 100%;
+  height: 0;
+  padding-top: 56.25%; /* 16:9 aspect ratio */
+  background-color: #E5E7EB;
+  border-radius: 8px;
+  background-size: cover;
+  background-position: center;
+  margin-bottom: 1.2rem;
+}
+
+/* MOBILE RESPONSIVE ADJUSTMENTS */
+@media (max-width: 768px) {
+  .items-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .item-image {
+    padding-top: 100%; /* square thumbnails on mobile */
+  }
+
+  .item-detail-image {
+    padding-top: 75%; /* slightly taller on mobile */
+  }
+}
+
+/* object-fit fallback for <img> tags if I ever use them */
+.item-card img,
+.item-detail img {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  object-fit: cover;
+  display: block;
+}
