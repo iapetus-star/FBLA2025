@@ -20,6 +20,17 @@ if (!itemId) {
   fetchItem(itemId);
 }
 
+// HELPER: get public image URL
+function getImageUrl(photoPath) {
+  if (!photoPath) return "";
+
+  const { data } = supabaseClient.storage
+    .from("item-photos")
+    .getPublicUrl(photoPath);
+
+  return data.publicUrl;
+}
+
 // FETCH ITEM
 async function fetchItem(id) {
   const { data, error } = await supabaseClient
@@ -34,7 +45,11 @@ async function fetchItem(id) {
     return;
   }
 
-  renderItem(data);
+  // attach image URL
+  renderItem({
+    ...data,
+    imageUrl: getImageUrl(data.photo_url)
+  });
 }
 
 // RENDER ITEM
@@ -53,7 +68,9 @@ function renderItem(item) {
 
   container.innerHTML = `
     <div class="item-detail-image" style="
-      background-image: url('${item.image_url || ""}');
+      background-image: url('${item.imageUrl || ""}');
+      background-size: cover;
+      background-position: center;
     "></div>
 
     <h2>${item.name}</h2>
@@ -62,7 +79,7 @@ function renderItem(item) {
     <div class="item-meta">
       Category: ${item.category || "Other"} •
       Location: ${item.location || "Unknown"} •
-      Date: ${item.date_lost || item.date_found || "—"}
+      Date: ${item.date_lost_found || "—"}
     </div>
 
     <div class="item-description">
