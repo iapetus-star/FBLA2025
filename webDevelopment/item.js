@@ -20,6 +20,16 @@ if (!itemId) {
   fetchItem(itemId);
 }
 
+//HELPER: Capitalizes the first letter of each word
+function capitalizeWords(str) {
+  if (!str || typeof str !== "string") return "Unknown"; // fallback
+  return str
+    .trim()
+    .split(/\s+/)
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+}
+
 // HELPER: get public image URL
 function getImageUrl(photoPath) {
   if (!photoPath) return "";
@@ -71,7 +81,7 @@ function renderItem(item) {
       background-image: url('${item.imageUrl || ""}');
     "></div>
 
-    <h2>${item.name}</h2>
+    <h2>${item.name ? capitalizeWords(item.name) : "Unnamed Item"}</h2>
     <div class="badge ${item.status}">${statusText}</div>
 
     <div class="item-meta">
@@ -81,7 +91,7 @@ function renderItem(item) {
     </div>
 
     <div class="item-description">
-      ${item.description || "No description provided."}
+      ${item.description ? capitalizeWords(item.description) : || "No description provided."}
     </div>
 
     <div class="info-box">
