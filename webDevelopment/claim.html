@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Lost & Found Claim Form</title>
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <h1>School Lost & Found</h1>
+    <div class="nav-links">
+      <a href="#">Home</a>
+      <a href="lost">Lost Items</a>
+      <a href="found.html">Found Items</a>
+      <a href="report.html">Report Item</a>
+    </div>
+  </nav>
+
+<div class="form-container">
+  <h2>Lost & Found Claim Form</h2>
+
+  <form id="claimForm">
+    <label>Full Name</label>
+    <input type="text" required>
+
+    <label>School Email Address</label>
+    <input type="email" required>
+
+    <label>Item Name</label>
+    <input type="text" required>
+
+    <label>Item Description</label>
+    <textarea rows="3" required></textarea>
+
+    <label>Location Where Item Was Found</label>
+    <textarea rows="3" required></textarea>
+
+    <label>Date Item Was Lost (Approximate)</label>
+    <input type="date">
+
+    <label>Proof of Ownership (Describe what you will bring)</label>
+    <textarea rows="3" required></textarea>
+    <small>
+      Valid proof may include a photo of the item, unique identifying details,
+      contents inside the item, a serial number, receipt, or the ability to unlock/access it.
+    </small>
+
+    <div class="notice">
+      <strong>Pickup Reminder:</strong><br>
+      Items must be picked up at the location listed on the website.<br>
+      Valid proof of ownership is required.
+    </div>
+
+    <button type="submit">Submit Claim</button>
+  </form>
+
+  <div class="success" id="successMessage">
+    <strong>Request Submitted Successfully</strong><br><br>
+    Your claim has been received and is currently being reviewed by the Lost & Found administrators.<br><br>
+    If your request is approved, please stop by the location where the item is being held to pick it up.<br><br>
+    If your request is not approved, administrators may contact you to request additional proof of ownership.
+  </div>
+</div>
+
+<script>
+  document.getElementById("claimForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    document.getElementById("claimForm").style.display = "none";
+    document.getElementById("successMessage").style.display = "block";
+  });
+</script>
+
+</body>
+</html>
