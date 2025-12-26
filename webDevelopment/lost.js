@@ -16,6 +16,15 @@ const locationFilter = document.getElementById("locationFilter");
 // STATE
 let allItems = [];
 
+//HELPER:  Capitalizes the first letter of each word
+function capitalizeWords(str) {
+  if (!str) return "";
+  return str
+    .split(" ")
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+}
+
 // HELPER: get public image URL
 function getImageUrl(photoPath) {
   if (!photoPath) {
@@ -69,11 +78,11 @@ function renderItems(items) {
         background-image: url('${item.imageUrl || ""}');
       "></div>
 
-      <h4>${item.name}</h4>
+      <h4>${capitalizeWords(item.name)}</h4>
       <span class="badge lost">Lost</span>
 
       <p style="font-size: 0.8rem; color: #555;">
-        ${item.location || "Unknown location"}
+        ${capitalizeWords(item.location) || "Unknown location"}
       </p>
     `;
 
