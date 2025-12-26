@@ -2,7 +2,6 @@
 const SUPABASE_URL = "https://aynvmshmrcxcccglxcdk.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF5bnZtc2htcmN4Y2NjZ2x4Y2RrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjYyNzEzMjgsImV4cCI6MjA4MTg0NzMyOH0.JAShR_lIGbv7MVUaiMf5qm1ufEFTXbwL6Rs4R1CYL-M";
 
-
 const supabaseClient = supabase.createClient(
   SUPABASE_URL,
   SUPABASE_ANON_KEY
@@ -17,6 +16,19 @@ const locationFilter = document.getElementById("locationFilter");
 // STATE
 let allItems = [];
 
+// HELPER: get public image URL
+function getImageUrl(photoPath) {
+  if (!photoPath) {
+    return "";
+  }
+
+  const { data } = supabaseClient.storage
+    .from("item-photos")
+    .getPublicUrl(photoPath);
+
+  return data.publicUrl;
+}
+
 // FETCH LOST ITEMS
 async function fetchLostItems() {
   const { data, error } = await supabaseClient
@@ -30,7 +42,12 @@ async function fetchLostItems() {
     return;
   }
 
-  allItems = data;
+  // attach image URLs
+  allItems = data.map(item => ({
+    ...item,
+    imageUrl: getImageUrl(item.photo_url)
+  }));
+
   renderItems(allItems);
 }
 
@@ -49,12 +66,14 @@ function renderItems(items) {
 
     card.innerHTML = `
       <div class="item-image" style="
-        background-image: url('${item.image_url || ""}');
+        background-image: url('${item.imageUrl || ""}');
         background-size: cover;
         background-position: center;
       "></div>
+
       <h4>${item.name}</h4>
       <span class="badge lost">Lost</span>
+
       <p style="font-size: 0.8rem; color: #555;">
         ${item.location || "Unknown location"}
       </p>
