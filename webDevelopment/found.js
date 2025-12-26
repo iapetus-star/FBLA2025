@@ -20,10 +20,16 @@ let allItems = [];
 function getImageUrl(photoPath) {
   if (!photoPath) return "";
 
-  const { data } = supabaseClient.storage
+  const { data, error } = supabaseClient.storage
     .from("item-photos")
     .getPublicUrl(photoPath);
 
+  if (error) {
+    console.error("Error getting public URL:", error);
+    return "";
+  }
+
+  console.log("Public URL:", data.publicUrl); // Debug URL
   return data.publicUrl;
 }
 
