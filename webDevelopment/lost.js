@@ -18,9 +18,10 @@ let allItems = [];
 
 //HELPER:  Capitalizes the first letter of each word
 function capitalizeWords(str) {
-  if (!str) return "";
+  if (!str || typeof str !== "string") return "Unknown"; // fallback
   return str
-    .split(" ")
+    .trim()
+    .split(/\s+/)
     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
 }
@@ -78,12 +79,12 @@ function renderItems(items) {
         background-image: url('${item.imageUrl || ""}');
       "></div>
 
-      <h4>${capitalizeWords(item.name)}</h4>
+      <h4>${item.name ? capitalizeWords(item.name) : "Unnamed Item"}</h4>
       <span class="badge lost">Lost</span>
 
       <p style="font-size: 0.8rem; color: #555;">
-        ${capitalizeWords(item.location) || "Unknown location"}
-      </p>
+        ${item.location ? capitalizeWords(item.location) : "Unknown location"}
+      </p>     
     `;
 
     card.addEventListener("click", () => {
