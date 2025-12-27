@@ -41,7 +41,11 @@ function getImageUrl(photoPath) {
 async function fetchFoundItems() {
   const { data, error } = await supabaseClient
     .from("items")
-    .select("*")
+    .select(`
+      *,
+      categories(name)
+    `)
+    
     .eq("status", "found")
     .order("date_reported", { ascending: false });
 
@@ -105,7 +109,7 @@ function applyFilters() {
       (item.description || "").toLowerCase().includes(search);
 
     const matchesCategory =
-      !category || item.category?.toLowerCase() === category;
+      !category || item.categoryName?.toLowerCase() === category; 
 
     const matchesLocation =
       !location || item.location?.toLowerCase() === location;
