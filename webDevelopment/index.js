@@ -7,10 +7,32 @@ const supabaseClient = supabase.createClient(
   SUPABASE_ANON_KEY
 );
 
+// DOM ELEMENT
+const grid = document.getElementById("items-grid");
+
+// HELPER: Capitalizes the first letter of each word
+function capitalizeWords(str) {
+  if (!str || typeof str !== "string") return "Unknown"; // fallback
+  return str
+    .trim()
+    .split(/\s+/)
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+}
+
+// HELPER: Get public image URL
+function getImageUrl(photoPath) {
+  if (!photoPath) return "items/placeholder.jpg";
+
+  const { data: { publicUrl } } = supabaseClient.storage
+    .from("item-photos")
+    .getPublicUrl(photoPath);
+
+  return publicUrl || "items/placeholder.jpg";
+}
+
 // FETCH RECENT ITEMS
 async function loadRecentItems() {
-  const grid = document.getElementById("items-grid");
-
   const { data, error } = await supabaseClient
     .from("items")
     .select("*")
@@ -26,16 +48,7 @@ async function loadRecentItems() {
   grid.innerHTML = "";
 
   data.forEach(item => {
-    // Generate image URL
-    let imageUrl = "items/placeholder.jpg";
-
-    if (item.photo_url) {
-      const { data } = supabaseClient.storage
-        .from("item-photos")
-        .getPublicUrl(item.photo_url);
-
-      imageUrl = data.publicUrl;
-    }
+    const imageUrl = getImageUrl(item.photo_url);
 
     const card = document.createElement("div");
     card.className = "item-card";
@@ -45,7 +58,7 @@ async function loadRecentItems() {
         <img src="${imageUrl}" alt="${item.name || "Item image"}">
       </div>
 
-      <h4>${item.name || "Unnamed Item"}</h4>
+      <h4>${item.name ? capitalizeWords(item.name) : "Unnamed Item"}</h4>
 
       <span class="badge ${item.status}">
         ${item.status.charAt(0).toUpperCase() + item.status.slice(1)}
