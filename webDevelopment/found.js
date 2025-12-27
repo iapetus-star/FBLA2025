@@ -41,11 +41,12 @@ function getImageUrl(photoPath) {
 async function fetchFoundItems() {
   const { data, error } = await supabaseClient
     .from("items")
+
     .select(`
       *,
-      categories(name)
-    `)
-    
+      categories (
+        name
+      )`)    
     .eq("status", "found")
     .order("date_reported", { ascending: false });
 
