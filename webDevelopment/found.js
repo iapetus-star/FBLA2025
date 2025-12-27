@@ -68,6 +68,23 @@ async function fetchFoundItems() {
   renderItems(allItems);
 }
 
+// POPULATE CATEGORIES
+async function populateCategories() {
+  const { data, error } = await supabaseClient
+    .from("categories")
+    .select("name")
+    .order("name");
+
+  if (error) return console.error(error);
+
+  data.forEach(cat => {
+    const opt = document.createElement("option");
+    opt.value = cat.name;
+    opt.textContent = cat.name;
+    categoryFilter.appendChild(opt);
+  });
+}
+
 // RENDER ITEMS
 function renderItems(items) {
   itemsGrid.innerHTML = "";
@@ -132,3 +149,4 @@ locationFilter.addEventListener("change", applyFilters);
 
 // INIT
 fetchFoundItems();
+populateCategories();
