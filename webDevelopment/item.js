@@ -89,7 +89,7 @@ function renderItem(item) {
     <div class="badge ${item.status}">${statusText}</div>
 
     <div class="item-meta">
-      Category: Category: ${capitalizeWords(item.categories?.name) || "Other"} •
+      Category: ${item.categories?.name ? capitalizeWords(item.categories.name) : "Other"} •
       Location: ${item.location || "Unknown"} •
       Date: ${item.date_lost_found || "—"}
     </div>
