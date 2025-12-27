@@ -55,15 +55,20 @@ async function fetchFoundItems() {
     return;
   }
 
-  // attach image URLs and save category name
-  allItems = data.map(item => ({
-    ...item,
-    imageUrl: getImageUrl(item.photo_url),
-    categoryName: item.categories && item.categories.length > 0
-      ? item.categories[0].name
-      : "Unknown"
+// attach image URLs and save category name
+  allItems = data.map(item => {
+    // get category name from array safely
+    let categoryName = "Unknown";
+    if (Array.isArray(item.categories) && item.categories.length > 0) {
+      categoryName = item.categories[0].name.trim().toLowerCase(); // lowercase & trim
+    }
 
-  }));
+    return {
+      ...item,
+      imageUrl: getImageUrl(item.photo_url),
+      categoryName
+    };
+  });
 
   renderItems(allItems);
 }
@@ -131,7 +136,7 @@ function applyFilters() {
       (item.description || "").toLowerCase().includes(search);
 
     const matchesCategory =
-      !category || (item.categoryName || "").trim().toLowerCase() === category;
+      !category || item.categoryName === category;
 
     const matchesLocation =
       !location || item.location?.toLowerCase() === location;
