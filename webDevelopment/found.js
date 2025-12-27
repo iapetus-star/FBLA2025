@@ -58,8 +58,8 @@ async function fetchFoundItems() {
   // attach image URLs and save category name
   allItems = data.map(item => ({
     ...item,
-    imageUrl: getImageUrl(item.photo_url)
-      categoryName: item.category?.name || "Unknown",  
+    imageUrl: getImageUrl(item.photo_url),
+      categoryName: item.category?.name || "Unknown"  
   }));
 
   renderItems(allItems);
