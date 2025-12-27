@@ -59,9 +59,10 @@ async function fetchFoundItems() {
   allItems = data.map(item => ({
     ...item,
     imageUrl: getImageUrl(item.photo_url),
-    categoryName: item.category && item.category.length > 0
-      ? item.category[0].name
-      : "Unknown"  
+    categoryName: item.categories && item.categories.length > 0
+      ? item.categories[0].name
+      : "Unknown"
+
   }));
 
   renderItems(allItems);
@@ -113,7 +114,7 @@ function applyFilters() {
       (item.description || "").toLowerCase().includes(search);
 
     const matchesCategory =
-      !category || item.categoryName.toLowerCase() === category; 
+      !category || (item.categoryName || "").toLowerCase() === category;
 
     const matchesLocation =
       !location || item.location?.toLowerCase() === location;
