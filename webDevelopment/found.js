@@ -44,7 +44,7 @@ async function fetchFoundItems() {
 
     .select(`
       *,
-      categories (
+      category (
         name
       )`)    
     .eq("status", "found")
@@ -55,10 +55,11 @@ async function fetchFoundItems() {
     return;
   }
 
-  // attach image URLs
+  // attach image URLs and save category name
   allItems = data.map(item => ({
     ...item,
     imageUrl: getImageUrl(item.photo_url)
+      categoryName: item.category?.name || "Unknown",  
   }));
 
   renderItems(allItems);
@@ -110,7 +111,7 @@ function applyFilters() {
       (item.description || "").toLowerCase().includes(search);
 
     const matchesCategory =
-      !category || item.categoryName?.toLowerCase() === category; 
+      !category || item.categoryName.toLowerCase() === category; 
 
     const matchesLocation =
       !location || item.location?.toLowerCase() === location;
