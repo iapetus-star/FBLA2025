@@ -59,7 +59,7 @@ async function fetchFoundItems() {
   allItems = data.map(item => ({
     ...item,
     imageUrl: getImageUrl(item.photo_url),
-      categoryName: item.category?.name || "Unknown"  
+    categoryName: item.category?.name || "Unknown"  
   }));
 
   renderItems(allItems);
