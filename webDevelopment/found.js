@@ -114,7 +114,7 @@ function applyFilters() {
       (item.description || "").toLowerCase().includes(search);
 
     const matchesCategory =
-      !category || (item.categoryName || "").toLowerCase() === category;
+      !category || (item.categoryName || "").trim().toLowerCase() === category;
 
     const matchesLocation =
       !location || item.location?.toLowerCase() === location;
