@@ -43,7 +43,10 @@ function getImageUrl(photoPath) {
 async function fetchLostItems() {
   const { data, error } = await supabaseClient
     .from("items")
-    .select("*")
+    .select(`
+      *,
+      categories(name)
+      `)
     .eq("status", "lost")
     .order("date_reported", { ascending: false });
 
@@ -55,10 +58,30 @@ async function fetchLostItems() {
   // attach image URLs
   allItems = data.map(item => ({
     ...item,
-    imageUrl: getImageUrl(item.photo_url)
+    imageUrl: getImageUrl(item.photo_url),
+    categoryName: item.categories?.name
+      ? item.categories.name.trim().toLowerCase()
+      : "unknown"
   }));
 
   renderItems(allItems);
+}
+
+// POPULATE CATEGORIES
+async function populateCategories() {
+  const { data, error } = await supabaseClient
+    .from("categories")
+    .select("name")
+    .order("name");
+
+  if (error) return console.error(error);
+
+  data.forEach(cat => {
+    const opt = document.createElement("option");
+    opt.value = cat.name.toLowerCase().trim(); // ✅ normalized
+    opt.textContent = cat.name;
+    categoryFilter.appendChild(opt);
+  });
 }
 
 // RENDER ITEMS
@@ -107,7 +130,7 @@ function applyFilters() {
       (item.description || "").toLowerCase().includes(search);
 
     const matchesCategory =
-      !category || item.category?.toLowerCase() === category;
+      !category || item.categoryName === category;
 
     const matchesLocation =
       !location || item.location?.toLowerCase() === location;
