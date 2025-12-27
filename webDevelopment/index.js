@@ -55,7 +55,7 @@ async function loadRecentItems() {
 
     card.innerHTML = `
 <div class="item-image" style="
-        background-image: url('${item.imageUrl || ""}');
+        background-image: url('${imageUrl}');
       "></div>
 
       <h4>${item.name ? capitalizeWords(item.name) : "Unnamed Item"}</h4>
