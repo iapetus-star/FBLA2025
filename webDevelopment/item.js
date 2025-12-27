@@ -45,7 +45,11 @@ function getImageUrl(photoPath) {
 async function fetchItem(id) {
   const { data, error } = await supabaseClient
     .from("items")
-    .select("*")
+    .select(`
+      *,
+      categories (
+        name
+      )`)
     .eq("id", id)
     .single();
 
@@ -85,7 +89,7 @@ function renderItem(item) {
     <div class="badge ${item.status}">${statusText}</div>
 
     <div class="item-meta">
-      Category: ${item.category || "Other"} •
+      Category: Category: ${capitalizeWords(item.categories?.name) || "Other"} •
       Location: ${item.location || "Unknown"} •
       Date: ${item.date_lost_found || "—"}
     </div>
