@@ -41,10 +41,9 @@ function getImageUrl(photoPath) {
 async function fetchFoundItems() {
   const { data, error } = await supabaseClient
     .from("items")
-
     .select(`
       *,
-      categories!items_category_id(name)
+      categories(name)
       `)
       .eq("status", "found")
     .order("date_reported", { ascending: false });
@@ -55,19 +54,13 @@ async function fetchFoundItems() {
   }
 
 // attach image URLs and save category name
-  allItems = data.map(item => {
-    // get category name from array safely
-    let categoryName = "Unknown";
-    if (Array.isArray(item.categories) && item.categories.length > 0) {
-      categoryName = item.categories[0].name.trim().toLowerCase(); // lowercase & trim
-    }
-
-    return {
+  allItems = data.map(item => ({
       ...item,
       imageUrl: getImageUrl(item.photo_url),
-      categoryName
-    };
-  });
+      categoryName: item.categories?.name
+        ? item.categories.name.trim().toLowerCase()
+        : "unknown"
+  }));
 
   renderItems(allItems);
 }
@@ -83,7 +76,7 @@ async function populateCategories() {
 
   data.forEach(cat => {
     const opt = document.createElement("option");
-    opt.value = cat.name;
+    opt.value = cat.name.toLowerCase().trim(); // ✅ normalized
     opt.textContent = cat.name;
     categoryFilter.appendChild(opt);
   });
