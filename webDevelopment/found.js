@@ -44,10 +44,9 @@ async function fetchFoundItems() {
 
     .select(`
       *,
-      categories(
-        name
-      )`)    
-    .eq("status", "found")
+      categories!items_category_id(name)
+      `)
+      .eq("status", "found")
     .order("date_reported", { ascending: false });
 
   if (error) {
