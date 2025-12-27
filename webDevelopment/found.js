@@ -44,7 +44,7 @@ async function fetchFoundItems() {
 
     .select(`
       *,
-      category (
+      categories(
         name
       )`)    
     .eq("status", "found")
