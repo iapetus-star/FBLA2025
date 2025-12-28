@@ -197,7 +197,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // EDIT ITEM
   function openEditModal(id) {
-    const item = allItems.find(i => i.id === id);
+    const item = allItems.find(i => i.id === Number(id));
     if (!item) return;
 
     modalTitle.innerText = "Edit Item";
