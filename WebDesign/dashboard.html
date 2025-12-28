@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Dashboard - Cosmic Classroom</title>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+/* ------------------------------
+   GLOBAL STYLES
+------------------------------ */
+body {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    background: #0a0f24;
+    color: white;
+    overflow-x: hidden;
+}
+
+/* Cosmic stars */
+body::before {
+    content: '';
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    pointer-events: none;
+    box-shadow: 
+        50px 100px #fff,
+        200px 300px #fff,
+        400px 150px #fff,
+        600px 400px #fff,
+        800px 250px #fff;
+    animation: twinkle 5s infinite;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* ------------------------------
+   HEADER
+------------------------------ */
+header {
+    text-align: center;
+    padding: 20px;
+}
+
+.level-xp {
+    margin-top: 10px;
+    font-weight: 600;
+    color: #6ab9ff;
+}
+
+#streak-display {
+    display: block;
+    margin-top: 5px;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+
+ /* NAVBAR */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+        padding: 20px 40px;
+    background: rgba(0,0,0,0.4);
+    backdrop-filter: blur(8px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  nav .logo {
+    font-size: 26px;
+    font-weight: 700;
+    color: #6ab9ff;
+  }
+
+  nav ul {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+  }
+
+  nav ul li a:hover {
+    color: #6ab9ff;
+  }
+
+/* ------------------------------
+   MAIN DASHBOARD LAYOUT
+------------------------------ */
+.dashboard-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.main-content {
+    display: flex;
+    gap: 25px;
+}
+
+/* ------------------------------
+   CARD GRID
+------------------------------ */
+.item-cards {
+    flex: 3;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+.item-card {
+    background: #11172f;
+    padding: 20px;
+    border-radius: 15px;
+    border: 2px solid rgba(106, 185, 255, 0.3);
+    position: relative;
+    transition: 0.3s;
+}
+
+.item-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 15px #6ab9ff;
+}
+
+.item-card h3 {
+    margin: 0;
+    color: #6ab9ff;
+}
+
+.item-type {
+    font-size: 0.9rem;
+    opacity: 0.7;
+    margin-bottom: 10px;
+}
+
+.item-xp {
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+/* ------------------------------
+   PROGRESS BAR
+------------------------------ */
+.progress-bar-container {
+    background: #1a2340;
+    border-radius: 10px;
+    height: 10px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.progress-bar {
+    height: 100%;
+    background: #6ab9ff;
+    width: 0%;
+    transition: width 0.3s;
+}
+
+/* ------------------------------
+   COMPLETE BUTTON
+------------------------------ */
+.item-card button {
+    margin-top: 12px;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background: #6ab9ff;
+    color: black;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.item-card button.completed {
+    background: #c4d9ff;
+    text-decoration: line-through;
+}
+
+/* ------------------------------
+   SIDEBAR
+------------------------------ */
+.sidebar {
+    flex: 1;
+    background: #11172f;
+    padding: 20px;
+    border-radius: 15px;
+    border: 2px solid rgba(106, 185, 255, 0.3);
+}
+
+.sidebar h2 {
+    text-align: center;
+    color: #6ab9ff;
+}
+
+/* ------------------------------
+   BADGES
+------------------------------ */
+#badge-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.badge {
+    background: #1a2340;
+    border: 2px solid #6ab9ff;
+    padding: 8px 12px;
+    border-radius: 10px;
+    font-size: 1.2rem;
+}
+
+/* ------------------------------
+   NOTIFICATIONS
+------------------------------ */
+#notifications {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.notification {
+    background: #1a2340;
+    border: 2px solid #6ab9ff;
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin-top: 10px;
+    opacity: 0;
+    transform: translateX(100%);
+    animation: slideIn 0.4s forwards, fadeOut 0.5s 3s forwards;
+}
+
+@keyframes slideIn {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        transform: translateX(120%);
+    }
+}
+
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="logo">Cosmic Classroom</div>
+    <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="#">Dashboard</a></li>
+    <li><a href="lessons.html">Lessons</a></li>
+    <li><a href="videos.html">Videos</a></li>
+    <li><a href="quizzes.html">Quizzes</a></li>
+    <li><a href="schedule.html">Study Sessions</a></li>
+    <li><a href="resources.html">Resources</a></li>
+    </ul>
+</nav>
+
+<div class="dashboard-container">
+
+    <header>
+        <h1>Student Dashboard</h1>
+        <div class="level-xp">
+            <span id="level-display">Level: 1</span>
+            <span id="xp-display">XP: 0</span>
+            <span id="streak-display"></span>
+        </div>
+    </header>
+
+    <div class="main-content">
+
+        <!-- Card Grid -->
+        <div class="item-cards" id="item-cards">
+            <!-- Cards will be inserted by JS -->
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h2>Analytics</h2>
+            <canvas id="completionChart"></canvas>
+
+            <h2 style="margin-top:30px;">Badges</h2>
+            <div id="badge-container"></div>
+        </aside>
+
+    </div>
+</div>
+
+<!-- Notification Container -->
+<div id="notifications"></div>
+
+<script>
+/* 
+   MASTER ITEM DEFINITIONS
+   Dashboard defines titles, icons, XP values.
+*/
+const ITEMS = {
+    lessons: {
+        "black-holes-lesson": {
+            title: "Black Holes Lesson",
+            xp: 25,
+            type: "Lesson"
+        },
+        "solar-system-lesson-1": {
+            title: "Solar System Lesson",
+            xp: 20,
+            type: "Lesson"
+        }
+    },
+
+    quizzes: {
+        "black-holes-quiz": {
+            title: "Black Holes Quiz",
+            xp: 35,
+            type: "Quiz"
+        },
+        "solar-system-quiz": {
+            title: "Solar System Quiz",
+            xp: 30,
+            type: "Quiz"
+        }
+    },
+
+    videos: {
+        "video-black-holes": {
+            title: "Black Holes Videos",
+            xp: 20,
+            type: "Video"
+        },
+        "video-solar-system": {
+            title: "Solar System Videos",
+            xp: 15,
+            type: "Video"
+        }
+    },
+
+    pdfs: {
+        "pdf-black-holes": {
+            title: "Black Holes PDF",
+            xp: 15,
+            type: "PDF"
+        },
+        "pdf-solar-system": {
+            title: "Solar System PDF",
+            xp: 10,
+            type: "PDF"
+        }
+    }
+};
+
+// STORAGE READERS
+function readLessons() {
+    return JSON.parse(localStorage.getItem("dashboardData") || "{}");
+}
+
+function readQuizzes() {
+    return JSON.parse(localStorage.getItem("quizResults") || "{}");
+}
+
+function readPdfs() {
+    return JSON.parse(localStorage.getItem("completedPdfs") || "[]");
+}
+
+function readVideos() {
+    return JSON.parse(localStorage.getItem("completedVideos") || "[]");
+}
+
+// XP, LEVEL, BADGES, STREAK
+let totalXP = parseInt(localStorage.getItem("totalXP") || "0");
+
+// Level thresholds
+const LEVELS = [0, 50, 120, 220, 350, 500];
+
+// Badges
+const BADGES = [
+    { id: "beginner", threshold: 1, icon: "🌟", name: "Initiate" },
+    { id: "explorer", threshold: 4, icon: "🪐", name: "Explorer" },
+    { id: "master", threshold: 8, icon: "🚀", name: "Cosmic Master" }
+];
+let earnedBadges = JSON.parse(localStorage.getItem("earnedBadges") || "[]");
+
+// Streak
+let streak = parseInt(localStorage.getItem("streak") || "0");
+let lastDate = localStorage.getItem("lastCompletionDate");
+
+// NOTIFICATIONS
+function notify(text) {
+    const box = document.getElementById("notifications");
+    const el = document.createElement("div");
+    el.className = "notification";
+    el.textContent = text;
+    box.appendChild(el);
+    setTimeout(() => el.remove(), 4000);
+}
+
+// COMPLETION HANDLING
+function saveCompletion(itemId) {
+    // LESSONS
+    let lessons = readLessons();
+    if (ITEMS.lessons[itemId]) {
+        if (!lessons[itemId]?.completed) {
+            lessons[itemId] = { completed: true };
+            localStorage.setItem("dashboardData", JSON.stringify(lessons));
+        }
+        return;
+    }
+
+    // QUIZZES
+    let quizzes = readQuizzes();
+    if (ITEMS.quizzes[itemId]) {
+        if (!quizzes[itemId]) {
+            quizzes[itemId] = {
+                score: ITEMS.quizzes[itemId].xp, // assume full XP if marked manually
+                completed: true,
+                date: new Date().toISOString()
+            };
+            localStorage.setItem("quizResults", JSON.stringify(quizzes));
+        }
+        return;
+    }
+
+    // PDFs
+    let pdfs = readPdfs();
+    if (ITEMS.pdfs[itemId] && !pdfs.includes(itemId)) {
+        pdfs.push(itemId);
+        localStorage.setItem("completedPdfs", JSON.stringify(pdfs));
+        return;
+    }
+
+    // VIDEOS
+    let videos = readVideos();
+    if (ITEMS.videos[itemId] && !videos.includes(itemId)) {
+        videos.push(itemId);
+        localStorage.setItem("completedVideos", JSON.stringify(videos));
+        return;
+    }
+}
+
+function handleCompletion(itemId, itemData, button, progressBar) {
+    // Prevent double-complete
+    if (button.classList.contains("completed")) return;
+
+    // Save completion to localStorage
+    saveCompletion(itemId);
+
+    // XP
+    totalXP += itemData.xp;
+    localStorage.setItem("totalXP", totalXP);
+
+    // Streak update
+    updateStreak();
+
+    // Badges
+    updateBadges();
+
+    // Notify
+    notify(`${itemData.title} completed! +${itemData.xp} XP`);
+
+    // Visuals
+    button.textContent = "Completed";
+    button.classList.add("completed");
+    progressBar.style.width = "100%";
+
+    // Update level and chart
+    updateLevelDisplay();
+    updateCompletionChart();
+}
+
+// STREAK UPDATE
+function updateStreak() {
+    const today = new Date().toDateString();
+
+    if (lastDate !== today) {
+        streak++;
+        localStorage.setItem("streak", streak);
+        localStorage.setItem("lastCompletionDate", today);
+        notify(`🔥 Streak: ${streak} day(s)!`);
+    }
+}
+
+// BADGE UPDATE
+function updateBadges() {
+    const completedCount = getTotalCompleted();
+
+    BADGES.forEach(b => {
+        if (completedCount >= b.threshold && !earnedBadges.includes(b.id)) {
+            earnedBadges.push(b.id);
+            localStorage.setItem("earnedBadges", JSON.stringify(earnedBadges));
+            notify(`Badge earned: ${b.name} ${b.icon}`);
+        }
+    });
+}
+
+function renderBadges() {
+    const box = document.getElementById("badge-container");
+    box.innerHTML = "";
+
+    earnedBadges.forEach(id => {
+        const b = BADGES.find(x => x.id === id);
+        let el = document.createElement("div");
+        el.className = "badge";
+        el.textContent = `${b.icon} ${b.name}`;
+        box.appendChild(el);
+    });
+}
+
+// LEVEL DISPLAY
+function updateLevelDisplay() {
+    const level = LEVELS.filter(x => totalXP >= x).length;
+    document.getElementById("level-display").textContent = `Level: ${level}`;
+    document.getElementById("xp-display").textContent = `XP: ${totalXP}`;
+    document.getElementById("streak-display").textContent = `Streak: ${streak} days`;
+}
+
+//BUILD ITEM CARDS
+function buildDashboard() {
+    const container = document.getElementById("item-cards");
+    container.innerHTML = "";
+
+    const lessonData = readLessons();
+    const quizData = readQuizzes();
+    const pdfData = readPdfs();
+    const videoData = readVideos();
+
+    // LOOP ALL DEFINED ITEMS
+    Object.entries(ITEMS).forEach(([category, entries]) => {
+        Object.entries(entries).forEach(([id, data]) => {
+            const card = document.createElement("div");
+            card.className = "item-card";
+            card.dataset.id = id;
+
+            // Determine if completed
+            const completed =
+                (category === "lessons" && lessonData[id]?.completed) ||
+                (category === "quizzes" && quizData[id]) ||
+                (category === "pdfs" && pdfData.includes(id)) ||
+                (category === "videos" && videoData.includes(id));
+
+            // Additional info for quizzes
+            let detailsHTML = "";
+            if (category === "quizzes" && quizData[id]) {
+                const q = quizData[id];
+                detailsHTML = `
+                    <p>Score: ${q.score} / ${q.totalQuestions || "?"}</p>
+                    <p>Difficulty: ${q.difficulty || "N/A"}</p>
+                    <p>Time Remaining: ${q.timeRemaining != null ? q.timeRemaining + "s" : "N/A"}</p>
+                    <p>Completed: ${q.date ? new Date(q.date).toLocaleString() : "N/A"}</p>
+                `;
+            }
+
+            // Optionally show completion date for lessons, videos, PDFs
+            if (category === "lessons" && lessonData[id]?.completed) {
+                detailsHTML += `<p>Completed: ${lessonData[id].date ? new Date(lessonData[id].date).toLocaleString() : "N/A"}</p>`;
+            }
+
+            card.innerHTML = `
+                <h3>${data.title}</h3>
+                <div class="item-type">${data.type}</div>
+                <div class="item-xp">XP: ${data.xp}</div>
+                ${detailsHTML}
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="bar-${id}" style="width:${completed ? "100%" : "0%"}"></div>
+                </div>
+                <button id="btn-${id}" class="${completed ? "completed" : ""}">
+                    ${completed ? "Completed" : "Mark Completed"}
+                </button>
+            `;
+
+            container.appendChild(card);
+
+            const btn = card.querySelector("button");
+            const bar = card.querySelector(".progress-bar");
+
+            btn.addEventListener("click", () => handleCompletion(id, data, btn, bar));
+        });
+    });
+}
+
+// CHART.JS ANALYTICS
+let completionChart = null;
+
+function getTotalCompleted() {
+    const lessons = readLessons();
+    const quizzes = readQuizzes();
+    const pdfs = readPdfs();
+    const videos = readVideos();
+
+    let completed = 0;
+
+    // Lessons
+    completed += Object.values(lessons).filter(x => x.completed).length;
+
+    // Quizzes
+    completed += Object.values(quizzes).length;
+
+    // PDFs
+    completed += pdfs.length;
+
+    // Videos
+    completed += videos.length;
+
+    return completed;
+}
+
+function updateCompletionChart() {
+    const completed = getTotalCompleted();
+    const total = Object.values(ITEMS).reduce(
+        (sum, group) => sum + Object.keys(group).length,
+        0
+    );
+
+    completionChart.data.datasets[0].data = [
+        completed,
+        total - completed
+    ];
+    completionChart.update();
+}
+
+function initChart() {
+    const ctx = document.getElementById("completionChart").getContext("2d");
+
+    completionChart = new Chart(ctx, {
+        type: "doughnut",
+        data: {
+            labels: ["Completed", "Remaining"],
+            datasets: [{
+                data: [0, 1],
+                backgroundColor: ["#6ab9ff", "#1a2340"]
+            }]
+        },
+        options: {
+            plugins: {
+                legend: { labels: { color: "white" } }
+            }
+        }
+    });
+
+    updateCompletionChart();
+}
+
+function initDashboard() {
+    buildDashboard();
+    updateLevelDisplay();
+    renderBadges();
+    initChart();
+}
+
+document.addEventListener("DOMContentLoaded", initDashboard);
+
+</script>
+</body>
+</html>
