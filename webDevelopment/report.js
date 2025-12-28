@@ -86,7 +86,7 @@ reportForm.addEventListener("submit", async (e) => {
 
   // INSERT INTO DATABASE
   const { error } = await supabaseClient.from("items").insert([{
-    status: reportType,        // lost/found
+    status: reportType === "lost" ? "pending_lost" : "pending_found",
     name,
     category_id,
     description,
