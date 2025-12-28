@@ -251,7 +251,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const payload = {
       name: title.value.trim(),
       description: description.value.trim(),
-      category: category.value.trim(),
+      category_id: category.value.trim(),
       status: status.value,
       location: locationInput.value.trim(),
       date_lost_found: date_event.value || null,
