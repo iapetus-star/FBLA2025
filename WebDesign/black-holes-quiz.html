@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Black Holes Quiz</title>
+
+<style>
+/* High contrast mode - global */
+  body.high-contrast {
+    background: white !important;
+    color: black !important;
+  }
+
+/* Remove starry background */
+  body.high-contrast .stars {
+    display: none !important;
+  }
+
+/* Containers */
+  body.high-contrast #start-screen,
+body.high-contrast .quiz-container,
+body.high-contrast #score-container {
+    background: white !important;
+    color: black !important;
+    box-shadow: none !important;
+  }
+
+/* Buttons */
+  body.high-contrast button,
+  body.high-contrast .btn,
+  body.high-contrast .options li button {
+    background: yellow !important;
+    color: black !important;
+    border: 2px solid black !important;
+  }
+
+/* Hover states */
+  body.high-contrast button:hover,
+  body.high-contrast .btn:hover {
+    background: #000 !important;
+    color: #fff !important;
+    border: 2px solid yellow !important;
+  }
+
+/* Input fields */
+  body.high-contrast input,
+body.high-contrast select {
+    background: white !important;
+    color: black !important;
+    border: 2px solid black !important;
+  }
+
+/* Progress bar */
+  body.high-contrast #progress-bar {
+    background: black !important;
+  }
+
+  body.high-contrast #progress {
+    background: yellow !important;
+  }
+
+/* Timer text */
+  body.high-contrast #timer {
+    color: black !important;
+  }
+
+/* Correct/Wrong indicators */
+  body.high-contrast .correct {
+    background: #008000 !important; /* dark green */
+    color: white !important;
+  }
+
+  body.high-contrast .wrong {
+    background: #b00000 !important; /* darker red */
+    color: white !important;
+  }
+
+  body.high-contrast #contrast-toggle {
+    background: black !important;
+    color: yellow !important;
+    border: 2px solid yellow !important;
+  }
+
+
+/* GLOBAL STYLES */
+  body {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    background: #000;
+    color: white;
+    overflow-x: hidden;
+  }
+
+/* Cosmic background animation */
+  .stars {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: url('https://i.imgur.com/Bz1q89v.png');
+    animation: drift 120s linear infinite;
+    z-index: -5;
+    opacity: 0.18;
+  }
+
+  @keyframes drift {
+    from { transform: translateY(0); }
+    to   { transform: translateY(2000px); }
+  }
+
+/* NAVBAR */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+        padding: 15px 25px;
+    background: rgba(0,0,0,0.4);
+    backdrop-filter: blur(8px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  nav .logo {
+    font-size: 26px;
+    font-weight: 700;
+    color: #6ab9ff;
+  }
+
+  nav ul {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+  }
+
+  nav ul li a:hover {
+    color: #6ab9ff;
+  }
+
+/* START SCREEN */
+  #start-screen {
+    max-width: 400px;
+    margin: 80px auto;
+    background: #11172f;
+    padding: 25px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0,0,0,0.7);
+  }
+
+  #start-screen input, #start-screen select {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 5px;
+  }
+
+/* QUIZ CONTAINER */
+  .quiz-container {
+    max-width: 800px;
+    margin: 40px auto;
+    background: #11172f;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.7);
+    display: none;
+    min-height: 200px;
+  }
+
+  #player-name-display {
+    text-align: right;
+    font-size: 18px;
+    margin-bottom: 10px;
+    opacity: 0.7;
+  }
+
+  .question {
+    font-size: 22px;
+    margin-bottom: 30px;
+  }
+
+/* OPTIONS */
+  .options {
+    list-style: none;
+    padding: 0;
+  }
+
+  .options li button {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 12px;
+    background: #1a2340;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 17px;
+    cursor: pointer;
+    transition: 0.15s;
+  }
+
+  .options li button:hover {
+    background: #6ab9ff;
+    color: black;
+  }
+
+/* Answer animations */
+  .correct {
+    background: #28a745 !important;
+  }
+
+  .wrong   {
+    background: #dc3545 !important;
+  }
+
+/* PROGRESS BAR */
+  #progress-bar {
+    width: 100%;
+    height: 12px;
+    background: #1a2340;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+
+  #progress {
+    height: 100%;
+    width: 0%;
+    background: #6ab9ff;
+    border-radius: 5px;
+    transition: width 0.3s;
+  }
+
+/* TIMER */
+  #timer {
+    text-align: right;
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #6ab9ff;
+  }
+
+/* SCORE SCREEN */
+  #score-container {
+    display: none;
+    text-align: center;
+  }
+
+/* Restart button */
+  .btn {
+    padding: 12px 25px;
+    background: #6ab9ff;
+    border: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    cursor: pointer;
+  }
+
+  .btn:hover {
+    background: white;
+  }
+
+/* High contrast toggle */
+  #contrast-toggle {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    padding: 10px 14px;
+    background: #333;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 3000 !important;
+    border: 2px solid white;
+  }
+</style>
+</head>
+<body>
+
+<div class="stars"></div>
+
+<button id="contrast-toggle">High Contrast</button>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="logo">Cosmic Classroom</div>
+
+    <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="dashboard.html">Dashboard</a></li>
+    <li><a href="quizzes.html">Quizzes</a></li>
+    </ul>
+</nav>
+
+
+<!-- START SCREEN -->
+<div id="start-screen">
+  <h1>Black Holes Quiz</h1>
+
+    <input id="playerName" type="text" placeholder="Enter your name (required)">
+    
+    <select id="difficulty">
+      <option value="Easy">Easy</option>
+      <option value="Normal">Normal</option>
+      <option value="Hard">Hard</option>
+    </select>
+
+    <button class="btn" onclick="beginQuiz()">Start Quiz</button>
+</div>
+
+<!-- QUIZ AREA -->
+<div class="quiz-container" id="quiz-area">
+
+  <div id="player-name-display"></div>
+  <div id="timer">Time: 60s</div>
+
+  <div id="progress-bar">
+    <div id="progress"></div>
+  </div>
+
+  <div id="quiz"></div>
+
+</div>
+
+<!-- SCORE SCREEN -->
+<div id="score-container">
+  <h2 id="final-score"></h2>
+    <p id="summary"></p>
+    <button class="btn" onclick="location.reload()">Restart</button>
+</div>
+
+
+
+<script>
+// QUIZ DATA 
+const quizData = [
+  {
+    question: "A black hole has gravity so strong that nothing can escape it.",
+    type: "truefalse",
+    options: ["True", "False"],
+    answer: "True"
+  },
+  {
+    question: "Which part of a black hole is the point of no return?",
+    type: "multiple",
+    options: ["Event Horizon", "Singularity", "Accretion Disk", "Photon Sphere"],
+    answer: "Event Horizon"
+  },
+  {
+    question: "Black holes can be detected by observing the effects on nearby objects.",
+    type: "truefalse",
+    options: ["True", "False"],
+    answer: "True"
+  },
+  {
+    question: "Fill in the blank: The center of a black hole is called the ____. ",
+    type: "text",
+    answer: "Singularity"
+  },
+  {
+    question: "True or False: Light can escape a black hole.",
+    type: "truefalse",
+    options: ["True", "False"],
+    answer: "False"
+  },
+  {
+    question: "Fill in the blank: The disk of gas and dust swirling around a black hole is called the ____ disk.",
+    type: "text",
+    answer: "Accretion"
+  },
+  {
+    question: "Which type of black hole has a mass of a few times our Sun?",
+    type: "multiple",
+    options: ["Stellar Black Hole", "Intermediate Black Hole", "Supermassive Black Hole", "Micro Black Hole"],
+    answer: "Stellar Black Hole"
+  }
+];
+
+// VARIABLES 
+let shuffledQuestions = [];
+let current = 0;
+let score = 0;
+let streak = 0;
+let name = "";
+let difficulty = "";
+let time = 60;
+let timerInterval;
+
+// START SCREEN LOGIC
+function beginQuiz() {
+  name = document.getElementById("playerName").value.trim();
+  difficulty = document.getElementById("difficulty").value;
+
+    if (!name) {
+      alert("Please enter your name.");
+      return;
+    }
+
+  document.getElementById("start-screen").style.display = "none";
+  document.getElementById("quiz-area").style.display = "block";
+  document.getElementById("player-name-display").textContent = "Player: " + name;
+
+startTimer();
+startQuiz();
+}
+
+// TIMER
+function startTimer() {
+  timerInterval = setInterval(() => {
+    time--;
+    document.getElementById("timer").textContent = "Time: " + time + "s";
+
+      if (time <= 0) {
+        clearInterval(timerInterval);
+        showScore();
+      }
+  }, 1000);
+}
+
+// QUIZ FUNCTIONS 
+function startQuiz() {
+  shuffledQuestions = [...quizData].sort(() => Math.random() - 0.5);
+  current = 0;
+  score = 0;
+  streak = 0;
+  showQuestion();
+}
+
+function showQuestion() {
+  if (current >= shuffledQuestions.length) return showScore();
+
+    const q = shuffledQuestions[current];
+
+// Randomize options
+    if (q.options) q.options = q.options.sort(() => Math.random() - 0.5);
+
+    updateProgress();
+
+    const quizEl = document.getElementById("quiz");
+    quizEl.innerHTML = `
+      <div class="question">${current + 1}. ${q.question}</div>
+    `;
+
+    if (q.type === "text") {
+      quizEl.innerHTML += `
+        <input type="text" id="text-answer" placeholder="Type your answer">
+        <button class="btn" onclick="checkTextAnswer()">Submit</button>
+      `;
+    return;
+    }
+
+    const ul = document.createElement("ul");
+    ul.className = "options";
+
+    q.options.forEach(option => {
+      const li = document.createElement("li");
+      const btn = document.createElement("button");
+      btn.textContent = option;
+
+      btn.onclick = () => handleOptionClick(btn, option);
+      li.appendChild(btn);
+      ul.appendChild(li);
+    });
+
+    quizEl.appendChild(ul);
+}
+
+// CHECK ANSWERS 
+function handleOptionClick(button, selected) {
+  const correct = shuffledQuestions[current].answer;
+
+    if (selected === correct) {
+      button.classList.add("correct");
+      score++;
+      streak++;
+    } else {
+      button.classList.add("wrong");
+      streak = 0;
+    }
+
+    if (streak === 3) score += 1;
+    if (streak === 5) score += 2;
+
+    setTimeout(() => {
+      current++;
+      showQuestion();
+    }, 600);
+}
+
+function checkTextAnswer() {
+  const input = document.getElementById("text-answer").value.trim();
+  const correct = shuffledQuestions[current].answer;
+
+    if (!input) return alert("Please type an answer!");
+
+    if (input.toLowerCase() === correct.toLowerCase()) {
+      score++;
+      streak++;
+    } else {
+      streak = 0;
+    }
+
+    if (streak === 3) score += 1;
+    if (streak === 5) score += 2;
+
+    current++;
+    showQuestion();
+}
+
+// PROGRESS BAR 
+function updateProgress() {
+  const percent = ((current + 1) / quizData.length) * 100;
+  document.getElementById("progress").style.width = percent + "%";
+}
+
+// Save quiz results to localStorage
+function saveQuizResult(quizId, score, totalQuestions, difficulty, timeRemaining) {
+  // Get existing quiz results or initialize empty object
+  let quizResults = JSON.parse(localStorage.getItem('quizResults') || '{}');
+
+  // Save/update result for this quizId
+    quizResults[quizId] = {
+      score: score,
+      totalQuestions: totalQuestions,
+      difficulty: difficulty,
+      timeRemaining: timeRemaining,
+      date: new Date().toISOString()
+    };
+
+    localStorage.setItem('quizResults', JSON.stringify(quizResults));
+    console.log('Saved quiz result:', quizResults[quizId]);
+}
+
+// SCORE SCREEN 
+function showScore() {
+  clearInterval(timerInterval);
+
+  document.getElementById("quiz-area").style.display = "none";
+  document.getElementById("score-container").style.display = "block";
+
+  document.getElementById("final-score").textContent =
+    `${name}, you scored ${score} out of ${quizData.length}!`;
+
+  document.getElementById("summary").innerHTML = `
+    <strong>Difficulty:</strong> ${difficulty}<br>
+    <strong>Time Remaining:</strong> ${time} seconds<br>
+    <strong>Accuracy:</strong> ${((score / quizData.length) * 100).toFixed(1)}%
+  `;
+
+  // Save result for dashboard 
+  saveQuizResult('black-holes-quiz', score, quizData.length, difficulty, time);
+}
+
+// HIGH CONTRAST MODE 
+document.getElementById("contrast-toggle").onclick = () => {
+  document.body.classList.toggle("high-contrast");
+};
+</script>
+
+</body>
+</html>
