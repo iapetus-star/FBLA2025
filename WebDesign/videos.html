@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Videos - Cosmic Classroom</title>
+<style>
+  body {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    background: #0a0f24;
+    color: white;
+    overflow-x: hidden;
+  }
+
+  a {
+    text-decoration: none;
+    color: white;
+  }
+
+  h1, h2, h3 {
+    margin: 0;
+  }
+
+ /* Navbar */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background: rgba(0,0,0,0.4);
+    backdrop-filter: blur(8px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  nav .logo {
+    font-size: 26px;
+    font-weight: 700;
+    color: #6ab9ff;
+  }
+
+  nav ul {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+  }
+
+  nav ul li a:hover {
+    color: #6ab9ff;
+  }
+
+ /* Hero / Banner */
+  .hero {
+    background: url('https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=1400&q=80')
+      center/cover no-repeat;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 60px;
+    box-shadow: inset 0 0 200px black;
+  }
+
+  .hero h1 {
+    font-size: 50px;
+    text-shadow: 0 0 20px black;
+    color: #6ab9ff;
+  }
+
+  .hero p {
+    font-size: 20px;
+    margin-top: 10px;
+    text-shadow: 0 0 10px black;
+  }
+
+ /* Section */
+  .section {
+    padding: 60px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section h2 {
+    color: #6ab9ff;
+    margin-bottom: 30px;
+    font-size: 32px;
+    text-align: center;
+  }
+
+ /* Video Grid */
+  .video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+  }
+
+  .video-card {
+    background: #11172f;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.7);
+    transition: 0.3s;
+  }
+
+  .video-card:hover {
+    transform: translateY(-5px);
+    background: #1a2340;
+  }
+
+  .video-card h3 {
+    margin-top: 15px;
+    color: #6ab9ff;
+  }
+
+  .video-card p {
+    margin-top: 10px;
+    color: #ccc;
+  }
+
+  .video-card hr {
+    border: 0;
+    height: 1px;
+    background: #2a3350; 
+    margin: 15px 0;
+  }
+
+ /* Thumbnail styling */
+  .thumb-container {
+    position: relative;
+    width: 100%;
+    cursor: pointer;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .thumb-container img {
+    width: 100%;
+    border-radius: 10px;
+    display: block;
+  }
+
+  .play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 55px;
+    color: #6ab9ff;
+    text-shadow: 0 0 15px black;
+    pointer-events: none;
+  }
+
+ /* Popup */
+  .popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(6px);
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+  }
+
+  .popup-content {
+    background: #0d132b;
+    padding: 25px;
+    border-radius: 12px;
+    text-align: center;
+    width: 320px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.8);
+  }
+
+  .popup-content h2 {
+    color: #6ab9ff;
+    margin-bottom: 15px;
+  }
+
+  .close {
+    float: right;
+    font-size: 26px;
+    cursor: pointer;
+    color: #6ab9ff;
+  }
+
+  .watch-btn {
+    display: inline-block;
+    background: #6ab9ff;
+    color: #0a0f24;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+
+ /* Footer */
+  footer {
+    text-align: center;
+    padding: 40px;
+    margin-top: 40px;
+    background: #080b17;
+    font-size: 14px;
+    color: #8ca0c7;
+  }
+
+  @media(max-width:600px){
+    .hero {
+      padding-left: 30px;
+    }
+
+    .hero h1 {
+      font-size: 36px;
+    }
+
+    .hero p {
+      font-size: 16px;
+    }
+  }
+</style>
+
+</head>
+<body>
+<!-- Screen reader only, announces when a popup is open -->
+<div id="sr-popup-alert" aria-live="assertive" style="position:absolute; left:-9999px;">
+</div>
+
+<!-- Popup (global) -->
+<div id="videoPopup" class="popup">
+  <div class="popup-content">
+    <span class="close" onclick="closeVideoPopup()">&times;</span>
+    <h2>Watch on YouTube</h2>
+    <a id="popupLink" href="#" target="_blank" class="watch-btn">Open Video</a>
+  </div>
+</div>
+
+<!-- Navbar -->
+<nav>
+  <div class="logo">Cosmic Classroom</div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="dashboard.html">Dashboard</a></li>
+    <li><a href="lessons.html">Lessons</a></li>
+    <li><a href="#">Videos</a></li>
+    <li><a href="quizzes.html">Quizzes</a></li>
+    <li><a href="schedule.html">Study Sessions</a></li>
+    <li><a href="resources.html">Resources</a></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<div class="hero">
+  <h1>Space Videos</h1>
+  <p>Watch amazing astronomy videos covering planets, stars, black holes, and space technology.</p>
+</div>
+
+<!-- Section -->
+<div class="section">
+  <h2>Featured Videos</h2>
+
+  <div class="video-grid">
+
+<!-- Video 1 -->
+    <div class="video-card">
+      <h3>The Solar System Explained</h3>
+      <p>Explore all the planets, moons, and the Sun in this beginner-friendly video.</p>
+      <hr />
+      <div class="thumb-container" onclick="openVideoPopup('libKVRa01L8')">
+        <img src="https://img.youtube.com/vi/libKVRa01L8/hqdefault.jpg" alt="Digital illustration of the eight planets of the solar system aligned horizontally against a starry background. From left to right: Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, and Neptune.">
+        <div class="play-btn">▶</div>
+      </div>
+      <hr />
+    </div>
+
+<!-- Video 2 -->
+    <div class="video-card">
+      <h3>Stars & Their Life Cycle</h3>
+      <p>Learn how stars are born, live, and eventually die in spectacular ways.</p>
+      <hr />
+      <div class="thumb-container" onclick="openVideoPopup('PM9CQDlQI0A')">
+        <img src="https://img.youtube.com/vi/PM9CQDlQI0A/hqdefault.jpg" alt="Deep space scene with a purple and black background filled with scattered stars. A bright celestial object near the center emits soft white and blue light amid swirling cosmic dust and nebulous formations.">
+        <div class="play-btn">▶</div>
+      </div>
+      <hr />
+    </div>
+
+<!-- Video 3 -->
+    <div class="video-card">
+      <h3>Black Holes Explained</h3>
+      <p>Understand these mysterious cosmic phenomena and how they affect space and time.</p>
+      <hr />
+      <div class="thumb-container" onclick="openVideoPopup('nJ4d4QEDOYM')">
+        <img src="https://img.youtube.com/vi/nJ4d4QEDOYM/hqdefault.jpg" alt="Artistic visualization of a black hole with a dark center surrounded by a bright glowing accretion disk, set against a star-filled cosmic background. White bold text overlays the image reading ‘WHAT IS A BLACK HOLE?’ with emphasis on ‘BLACK HOLE.’">
+        <div class="play-btn">▶</div>
+      </div>
+      <hr />
+    </div>
+
+<!-- Video 4 -->
+    <div class="video-card">
+      <h3>Space Technology & Exploration</h3>
+      <p>Discover how rockets, satellites, and telescopes let humans explore the cosmos.</p>
+      <hr />
+      <div class="thumb-container" onclick="openVideoPopup('68PlPkeOwng')">
+        <img src="https://img.youtube.com/vi/68PlPkeOwng/hqdefault.jpg" alt="Complex industrial machinery with pipes and wiring, featuring a bright flame or exhaust near the left side, likely from an engine or combustion process inside a facility. The image includes the text ‘FULL DOCUMENTARY’ and represents a video about space technology and exploration, including rockets, satellites, spacecraft, and telescopes.">
+        <div class="play-btn">▶</div>
+      </div>
+      <hr />
+    </div>
+
+<!-- Video 5 -->
+    <div class="video-card">
+      <h3>Galaxies of the Universe</h3>
+      <p>Travel through different galaxies and learn about their amazing structures.</p>
+      <hr />
+      <div class="thumb-container" onclick="openVideoPopup('937stSQMr64')">
+        <img src="https://img.youtube.com/vi/937stSQMr64/hqdefault.jpg" alt="Vibrant cosmic scene with several planets floating in space, dominated by a large cratered planet in the foreground glowing with orange and blue hues. Smaller planets and moons surround it against a backdrop of stars, nebulae, and colorful cosmic clouds, creating a dynamic, otherworldly galaxy or star system.">
+        <div class="play-btn">▶</div>
+      </div>
+      <hr />
+    </div>
+
+<!-- Video 6 -->
+    <div class="video-card">
+      <h3>Comets & Asteroids</h3>
+      <p>Learn about these small but fascinating objects in the Solar System.</p>
+      <hr />
+      <div class="thumb-container" onclick="openVideoPopup('02wrLS-ue1Q')">
+        <img src="https://img.youtube.com/vi/02wrLS-ue1Q/hqdefault.jpg" alt="Thumbnail for a video titled ‘Comets and Asteroids’ with the title in large white text on a dark background. Surrounding the text are images of three rocky asteroids and a bright comet with a glowing tail, framed by colorful purple, blue, and green borders.">
+        <div class="play-btn">▶</div>
+      </div>
+      <hr />
+    </div>
+
+<!-- Video 7 -->
+    <div class="video-card">
+      <h3>Exoplanets & Alien Worlds</h3>
+      <p>Explore planets outside our solar system and what they might be like.</p>
+      <hr />
+      <div class="thumb-container" onclick="openVideoPopup('HTHj_pvEYYE')">
+        <img src="https://img.youtube.com/vi/HTHj_pvEYYE/hqdefault.jpg" alt="astronaut stands on a surface with a large greenish planet and a smaller moon or planet in the background, holding a black flag with a white alien-like handprint. The sky has a misty green hue, and text at the bottom reads ‘THE SIGHTS OF SPACE’ with smaller text below saying ‘A VOYAGE TO SPECTACULAR ALIEN WORLDS.’">
+        <div class="play-btn">▶</div>
+      </div>
+      <hr />
+    </div>
+
+  </div>
+</div>
+
+<!-- Footer -->
+<footer>
+  Cosmic Classroom © 2026 — Built by Students, for Students
+</footer>
+
+<!--Java  Script -->
+<script>
+// Track completed videos in localStorage
+function markVideoComplete(videoId) {
+    let completedVideos = JSON.parse(localStorage.getItem('completedVideos') || '[]');
+    if (!completedVideos.includes(videoId)) {
+        completedVideos.push(videoId);
+        localStorage.setItem('completedVideos', JSON.stringify(completedVideos));
+        console.log("Video marked complete:", videoId);
+    }
+}
+
+function isVideoCompleted(videoId) {
+    let completedVideos = JSON.parse(localStorage.getItem('completedVideos') || '[]');
+    return completedVideos.includes(videoId);
+}
+
+function openVideoPopup(videoId) {
+  const popup = document.getElementById("videoPopup");
+  const link = document.getElementById("popupLink");
+
+  link.href = "https://www.youtube.com/watch?v=" + videoId;
+  popup.style.display = "flex";
+
+  // Mark video complete when user clicks
+  markVideoComplete(videoId);
+
+  // Accessibility: Screen reader announcement
+  document.getElementById("sr-popup-alert").textContent =
+    "Video popup opened. Press Open Video to watch on YouTube.";
+}
+
+function closeVideoPopup() {
+  document.getElementById("videoPopup").style.display = "none";
+
+  // Reset alert so it can trigger again next time
+  document.getElementById("sr-popup-alert").textContent = "";
+}
+</script>
+</body>
+</html>
