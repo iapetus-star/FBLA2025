@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const adminContent = document.getElementById("adminContent");
   const table = document.getElementById("itemsTable");
   const searchInput = document.getElementById("searchInput");
-  const categoryFilter = document.getElementById("categoryFilter");
+  const sortSelect = document.getElementById("sortSelect");
 
   const modal = document.getElementById("modal");
   const form = document.getElementById("itemForm");
@@ -127,7 +127,7 @@ function capitalizeWords(str) {
     );
 
 // SORTING (newest, oldest, A–Z)
-const sortValue = categoryFilter?.value;
+const sortValue = sortSelect.value;
 
 if (sortValue === "newest") {
   items.sort(
@@ -176,7 +176,7 @@ if (sortValue === "az") {
 
   // FILTER EVENTS
   searchInput.addEventListener("input", renderItems);
-  categoryFilter?.addEventListener("change", renderItems);
+  sortSelect.addEventListener("change", renderItems);
 
   document.querySelectorAll(".tabs button").forEach(btn => {
     btn.onclick = () => {
