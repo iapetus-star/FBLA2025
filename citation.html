@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Citations - Cosmic Classroom</title>
+<style>
+    body {
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        background: #0a0f24;
+        color: white;
+    }
+
+    h1, h2 {
+        color: #6ab9ff;
+        text-align: center;
+    }
+
+    /* NAVBAR */
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 40px;
+        background: rgba(0,0,0,0.4);
+        backdrop-filter: blur(8px);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+
+    nav .logo {
+        font-size: 26px;
+        font-weight: 700;
+        color: #6ab9ff;
+    }
+
+    nav ul {
+        display: flex;
+        gap: 30px;
+        list-style: none;
+        padding-left: 0;
+    }
+
+    nav ul li a {
+        color: white;
+        text-decoration: none;
+    }
+
+    nav ul li a:hover {
+        color: #6ab9ff;
+    }
+
+    /* CONTAINER */
+    .container {
+        max-width: 900px;
+        margin: 50px auto;
+        padding: 30px;
+        background: #11172f;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.7);
+    }
+
+    /* CREDIT SECTIONS */
+    .credit-section {
+        padding: 20px 0;
+        border-bottom: 1px solid rgba(106, 185, 255, 0.3);
+        display: flex;
+        gap: 15px;
+        align-items: flex-start;
+    }
+
+    .credit-section:last-child {
+        border-bottom: none;
+    }
+
+    .credit-icon {
+        font-size: 24px;
+        color: #6ab9ff;
+        flex-shrink: 0;
+    }
+
+    .credit-content {
+        line-height: 1.6;
+    }
+
+    a {
+        color: #6ab9ff;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+/* Footer */
+  footer {
+    text-align: center;
+    padding: 40px;
+    margin-top: 40px;
+    background: #080b17;
+    font-size: 14px;
+    color: #8ca0c7;
+  }
+
+
+</style>
+<!-- For icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-zNq/4Fg3Z8t2eFHVKX2JzGzGwlX3+hkR6qOTU6lD44X4x1z7Z5gAfIF0BZXvTSSbo3uvP5bduXZ0B7q2HpP0Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+    <div class="logo">Cosmic Classroom</div>
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="lessons.html">Lessons</a></li>
+        <li><a href="videos.html">Videos</a></li>
+        <li><a href="quizzes.html">Quizzes</a></li>
+        <li><a href="schedule.html">Study Sessions</a></li>
+        <li><a href="resources.html">Resources</a></li>
+    </ul>
+</nav>
+
+<h1>Cosmic Classroom</h1>
+<h2>Citations & Credits</h2>
+
+<div class="container">
+    <div class="credit-section">
+        <div class="credit-icon"><i class="fas fa-image"></i></div>
+        <div class="credit-content">
+            <strong>Images:</strong><br>
+            All images used on this website come from 
+            <a href="https://www.nasa.gov/" target="_blank">NASA</a>, 
+            <a href="https://stock.adobe.com/" target="_blank">Adobe Stock</a>, 
+            <a href="https://www.istockphoto.com/" target="_blank">iStock</a>, and 
+            <a href="https://www.unsplash.com/" target="_blank">Unsplash</a>.
+        </div>
+    </div>
+
+    <div class="credit-section">
+        <div class="credit-icon"><i class="fas fa-video"></i></div>
+        <div class="credit-content">
+            <strong>Videos:</strong><br>
+            All videos are sourced from <a href="https://www.youtube.com/" target="_blank">YouTube.com</a>.
+        </div>
+    </div>
+
+    <div class="credit-section">
+        <div class="credit-icon"><i class="fas fa-book"></i></div>
+        <div class="credit-content">
+            <strong>Other Content (Quizzes, Lessons, Downloadable Materials):</strong><br>
+            Content was created by me but adapted from resources by 
+            <a href="https://www.nasa.gov/" target="_blank">NASA</a>, 
+            <a href="https://www.esa.int/" target="_blank">ESA (European Space Agency)</a>, and 
+            <a href="https://www.space.com/" target="_blank">Space.com</a> to ensure accuracy.
+        </div>
+    </div>
+
+    <div class="credit-section">
+        <div class="credit-icon"><i class="fas fa-code"></i></div>
+        <div class="credit-content">
+            <strong>Code & Interactive Elements:</strong><br>
+            All website code, examples, and interactive features (like charts using Chart.js) were created by me.
+        </div>
+    </div>
+
+    <div class="credit-section">
+        <div class="credit-icon"><i class="fas fa-font"></i></div>
+        <div class="credit-content">
+            <strong>Fonts & Icons:</strong><br>
+            Fonts used: <a href="https://fonts.google.com/specimen/Poppins" target="_blank">Poppins</a>.
+        </div>
+    </div>
+
+    <div class="credit-section">
+        <div class="credit-icon"><i class="fas fa-balance-scale"></i></div>
+        <div class="credit-content">
+            <strong>Copyright Notice:</strong><br>
+            I do <strong>not</strong> claim credit for any copyrighted resources. All copyrighted content belongs to their respective owners and organizations.  
+            All resources are used strictly for <strong>educational purposes</strong>.
+        </div>
+    </div>
+
+    <div class="credit-section">
+        <div class="credit-icon"><i class="fas fa-star"></i></div>
+        <div class="credit-content">
+            <strong>Special Note:</strong><br>
+            While the majority of the content is my original work, I used existing scientific sources to ensure accuracy and completeness.
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer>
+  Cosmic Classroom © 2026 — Built by Students, for Students
+</footer>
+
+</body>
+</html>
