@@ -1,4 +1,4 @@
-// LET DOM LOAD FIRST
+// WAIT FOR DOM
 document.addEventListener("DOMContentLoaded", () => {
   // SUPABASE SETUP
   const supabase = window.supabase.createClient(
@@ -11,11 +11,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   );
 
-// STATE
+  // STATE
   let allItems = [];
   let currentStatus = "all";
 
-// ELEMENTS
+  // ELEMENTS
   const loginModal = document.getElementById("loginModal");
   const loginForm = document.getElementById("loginForm");
   const loginEmail = document.getElementById("loginEmail");
@@ -27,6 +27,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const modal = document.getElementById("modal");
   const form = document.getElementById("itemForm");
+  const modalTitle = document.getElementById("modalTitle");
+
   const itemId = document.getElementById("itemId");
   const title = document.getElementById("title");
   const category = document.getElementById("category");
@@ -34,19 +36,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const status = document.getElementById("status");
   const locationInput = document.getElementById("location");
   const date_event = document.getElementById("date_event");
+  const imageInput = document.getElementById("image");
 
-// HELPER FUNCTIONS
-  // Capitalize words
-function capitalizeWords(str) {
-  if (!str || typeof str !== "string") return "Unknown";
-  return str
-    .trim()
-     .split(/\s+/)
-    .map(w => w.charAt(0).toUpperCase() + w.slice(1))
-    .join(" ");
-}
+  // HELPERS
+  function capitalizeWords(str) {
+    if (!str || typeof str !== "string") return "";
+    return str
+      .trim()
+      .split(/\s+/)
+      .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+      .join(" ");
+  }
 
-  // Get public image URL
   function getImageUrl(photoPath) {
     if (!photoPath) return "";
     const { data } = supabase.storage
@@ -58,6 +59,7 @@ function capitalizeWords(str) {
   // LOGIN
   loginForm.onsubmit = async e => {
     e.preventDefault();
+
     const { error } = await supabase.auth.signInWithPassword({
       email: loginEmail.value,
       password: loginPassword.value
@@ -68,11 +70,12 @@ function capitalizeWords(str) {
       return;
     }
 
-    await checkAdminAccess();
+    await checkSession();
   };
 
   async function checkSession() {
     const { data: { session } } = await supabase.auth.getSession();
+
     if (session) {
       loginModal.classList.add("hidden");
       adminContent.classList.remove("hidden");
@@ -81,93 +84,75 @@ function capitalizeWords(str) {
       loginModal.classList.remove("hidden");
       adminContent.classList.add("hidden");
     }
+
     document.body.style.display = "block";
-  }
-
-  async function checkAdminAccess() {
-    const { data: { session } } = await supabase.auth.getSession();
-    if (!session?.user) return checkSession();
-
-    loginModal.classList.add("hidden");
-    adminContent.classList.remove("hidden");
-    await loadItems();
   }
 
   // LOAD ITEMS
   async function loadItems() {
-    const { data } = await supabase
+    const { data, error } = await supabase
       .from("items")
-      .select(`
-        *,
-        categories(name)
-      `)
+      .select("*")
       .order("date_reported", { ascending: false });
+
+    if (error) {
+      alert("Failed to load items");
+      return;
+    }
 
     allItems = (data || []).map(item => ({
       ...item,
-      imageUrl: getImageUrl(item.photo_url),
-      categoryName: item.categories?.name
-        ? item.categories.name.trim().toLowerCase()
-        : "unknown"
+      imageUrl: getImageUrl(item.photo_url)
     }));
 
     renderItems();
   }
 
-  // RENDER ITEMS
+  // RENDER TABLE
   function renderItems() {
     table.innerHTML = "";
 
     let items = [...allItems];
 
-    // Status filter
     if (currentStatus !== "all") {
       items = items.filter(i => i.status === currentStatus);
     }
 
-    // Search filter
     const search = searchInput.value.toLowerCase();
     items = items.filter(i =>
       (i.name ?? "").toLowerCase().includes(search)
     );
 
-// SORTING (newest, oldest, A–Z)
-const sortValue = sortSelect.value;
+    const sortValue = sortSelect.value;
 
-if (sortValue === "newest") {
-  items.sort(
-    (a, b) => new Date(b.date_lost_found) - new Date(a.date_lost_found)
-  );
-}
+    if (sortValue === "newest") {
+      items.sort((a, b) =>
+        new Date(b.date_lost_found) - new Date(a.date_lost_found)
+      );
+    }
 
-if (sortValue === "oldest") {
-  items.sort(
-    (a, b) => new Date(a.date_lost_found) - new Date(b.date_lost_found)
-  );
-}
+    if (sortValue === "oldest") {
+      items.sort((a, b) =>
+        new Date(a.date_lost_found) - new Date(b.date_lost_found)
+      );
+    }
 
-if (sortValue === "az") {
-  items.sort((a, b) =>
-    (a.name ?? "").localeCompare(b.name ?? "")
-  );
-}
+    if (sortValue === "az") {
+      items.sort((a, b) =>
+        (a.name ?? "").localeCompare(b.name ?? "")
+      );
+    }
 
     items.forEach(item => {
       const tr = document.createElement("tr");
 
       tr.innerHTML = `
-        <td>
-          ${item.imageUrl ? `<img src="${item.imageUrl}" width="40" />` : ""}
-        </td>
+        <td>${item.imageUrl ? `<img src="${item.imageUrl}" width="40">` : ""}</td>
         <td>${capitalizeWords(item.name)}</td>
-        <td>${capitalizeWords(item.categoryName)}</td>
+        <td>${capitalizeWords(item.category)}</td>
         <td>${item.date_lost_found ?? ""}</td>
-        <td>${capitalizeWords(item.location ?? "")}</td>
-        <td>
-          <span class="badge ${item.status}">
-            ${item.status}
-          </span>
-        </td>
+        <td>${capitalizeWords(item.location)}</td>
+        <td><span class="badge ${item.status}">${item.status}</span></td>
         <td>
           <button onclick="editItem('${item.id}')">Edit</button>
           <button onclick="markClaimed('${item.id}')">Claimed</button>
@@ -192,14 +177,15 @@ if (sortValue === "az") {
     };
   });
 
-  // MODAL LOGIC
-  window.editItem = function(id) {
+  // EDIT ITEM
+  window.editItem = id => {
     const item = allItems.find(i => i.id === id);
     if (!item) return;
 
+    modalTitle.innerText = "Edit Item";
     itemId.value = item.id;
-    title.value = item.name;
-    category.value = item.category_id ?? "";
+    title.value = item.name ?? "";
+    category.value = item.category ?? "";
     description.value = item.description ?? "";
     status.value = item.status;
     locationInput.value = item.location ?? "";
@@ -210,7 +196,9 @@ if (sortValue === "az") {
     modal.classList.remove("hidden");
   };
 
+  // ADD ITEM
   document.getElementById("addItemBtn").onclick = () => {
+    modalTitle.innerText = "Add Item";
     form.reset();
     itemId.value = "";
     modal.classList.remove("hidden");
@@ -224,19 +212,41 @@ if (sortValue === "az") {
   form.onsubmit = async e => {
     e.preventDefault();
 
+    let photo_url = null;
+
+    if (imageInput.files.length > 0) {
+      const file = imageInput.files[0];
+      const filePath = `${Date.now()}-${file.name}`;
+
+      const { error: uploadError } = await supabase.storage
+        .from("item-photos")
+        .upload(filePath, file);
+
+      if (uploadError) {
+        alert("Image upload failed");
+        return;
+      }
+
+      photo_url = filePath;
+    }
+
     const payload = {
       name: title.value.trim(),
       description: description.value.trim(),
-      category_id: category.value || null,
+      category: category.value.trim(),
       status: status.value,
       location: locationInput.value.trim(),
-      date_lost_found: date_event.value || null
+      date_lost_found: date_event.value || null,
+      ...(photo_url && { photo_url })
     };
 
-    if (itemId.value) {
-      await supabase.from("items").update(payload).eq("id", itemId.value);
-    } else {
-      await supabase.from("items").insert(payload);
+    const { error } = itemId.value
+      ? await supabase.from("items").update(payload).eq("id", itemId.value)
+      : await supabase.from("items").insert(payload);
+
+    if (error) {
+      alert("Error saving item: " + error.message);
+      return;
     }
 
     modal.classList.add("hidden");
