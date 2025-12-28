@@ -36,6 +36,7 @@ async function loadRecentItems() {
   const { data, error } = await supabaseClient
     .from("items")
     .select("*")
+    .in("status", ["lost", "found", "claimed"])
     .order("date_reported", { ascending: false })
     .limit(8);
 
