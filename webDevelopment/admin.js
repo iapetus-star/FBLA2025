@@ -154,15 +154,33 @@ document.addEventListener("DOMContentLoaded", () => {
         <td>${capitalizeWords(item.location)}</td>
         <td><span class="badge ${item.status}">${item.status}</span></td>
         <td>
-          <button onclick="editItem('${item.id}')">Edit</button>
-          <button onclick="markClaimed('${item.id}')">Claimed</button>
-          <button onclick="deleteItem('${item.id}')">Delete</button>
+          <button class="edit-btn" data-id="${item.id}">Edit</button>
+          <button class="claim-btn" data-id="${item.id}">Claimed</button>
+          <button class="delete-btn" data-id="${item.id}">Delete</button>
         </td>
       `;
 
       table.appendChild(tr);
     });
   }
+
+  // TABLE BUTTON CLICK HANDLER
+  table.addEventListener("click", e => {
+    const id = e.target.dataset.id;
+    if (!id) return;
+
+    if (e.target.classList.contains("edit-btn")) {
+      openEditModal(id);
+    }
+
+    if (e.target.classList.contains("delete-btn")) {
+      deleteItem(id);
+    }
+
+    if (e.target.classList.contains("claim-btn")) {
+      markClaimed(id);
+    }
+  });
 
   // FILTER EVENTS
   searchInput.addEventListener("input", renderItems);
@@ -178,7 +196,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // EDIT ITEM
-  window.editItem = id => {
+  function openEditModal(id) {
     const item = allItems.find(i => i.id === id);
     if (!item) return;
 
@@ -254,13 +272,13 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   // ACTIONS
-  window.deleteItem = async id => {
+  async function deleteItem(id) { 
     if (!confirm("Delete this item?")) return;
     await supabase.from("items").delete().eq("id", id);
     await loadItems();
   };
 
-  window.markClaimed = async id => {
+  async function markClaimed(id) { 
     await supabase
       .from("items")
       .update({ status: "claimed", claimed_by: "admin" })
