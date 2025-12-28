@@ -124,14 +124,38 @@
     color: #6ab9ff;
   }
 
- /* FUN FACT */
-  .fun-fact {
-    background: #1a2340;
+/* NASA CARD */
+  .nasa-card {
+    background: #11172f;
     padding: 25px;
-    border-left: 5px solid #6ab9ff;
-    margin-top: 40px;
-    border-radius: 8px;
-    font-size: 18px;
+    border-radius: 12px;
+    margin-top: 50px;
+    box-shadow: 0 0 25px rgba(0,0,0,0.6);
+    border: 1px solid #28345a;
+  }
+
+  .nasa-card h2 {
+    color: #6ab9ff;
+    margin-bottom: 20px;
+  }
+
+  .nasa-image {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.8);
+    margin-bottom: 15px;
+  }
+
+  .nasa-title {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #9acbff;
+  }
+
+  .nasa-description {
+    font-size: 16px;
+    line-height: 1.5em;
+    opacity: 0.85;
   }
 
  /* FOOTER */
@@ -159,8 +183,9 @@
     <li><a href="lessons.html">Lessons</a></li>
     <li><a href="videos.html">Videos</a></li>
     <li><a href="quizzes.html">Quizzes</a></li>
-    <li><a href="schedule.html">Study Sessions</a></li>
+    <li><a href="study.html">Study Sessions</a></li>
     <li><a href="resources.html">Resources</a></li>
+    <li><a href="citation.html">Citation</a></li>
     </ul>
 </nav>
 
@@ -196,17 +221,94 @@
     </div>
 
  <!-- FUN FACT BOX -->
-  <div class="fun-fact">
-    🌟 <strong>Did You Know?</strong>  
-    There are more stars in the universe than grains of sand on every beach on Earth.
-  </div>
-
+<div class="nasa-card" id="nasa-card">
+  <h2>NASA Daily Feature</h2>
+    <div class="nasa-content">
+      <p style="opacity:0.7;">Loading today's space highlight...</p>
+    </div>
 </div>
 
 <!-- FOOTER -->
 <footer>
-    Cosmic Classroom © 2025 — Built by Students, for Students  
+    Cosmic Classroom © 2026 — Built by Students, for Students  
 </footer>
+
+<script>
+async function loadNASAData() {
+  const apiKey = "DEMO_KEY";
+  const today = new Date().toISOString().split("T")[0];
+
+  // Check if we have cached data from today
+  const savedData = JSON.parse(localStorage.getItem("nasa_apod"));
+  
+  if (savedData && savedData.date === today) {
+    console.log("Loaded NASA APOD from cache");
+    displayNASAData(savedData);
+    return;
+  }
+
+  // Otherwise, fetch new data
+  try {
+    console.log("Fetching new NASA APOD...");
+    const response = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}`);
+    const data = await response.json();
+
+    // Save to localStorage with today’s date
+    const toStore = {
+      date: today,
+      title: data.title,
+      explanation: data.explanation,
+      url: data.url,
+      media_type: data.media_type
+    };
+
+    localStorage.setItem("nasa_apod", JSON.stringify(toStore));
+
+    displayNASAData(toStore);
+
+  } catch (error) {
+    console.error("NASA API error:", error);
+
+    // If API fails but old cache exists → show the cached version
+    if (savedData) {
+      displayNASAData(savedData);
+    } else {
+      document.querySelector(".nasa-content").innerHTML =
+        "<p style='color:#ff8080;'>⚠️ Unable to load NASA data.</p>";
+    }
+  }
+}
+
+function displayNASAData(data) {
+/*
+  const shortExplanation =
+    data.explanation.length > 300
+      ? data.explanation.substring(0, 300) + "..."
+      : data.explanation;
+*/
+const shortExplanation = data.explanation;
+
+  let content = `
+      <h3 class="nasa-title">${data.title}</h3>
+      <p class="nasa-description">${shortExplanation}</p>
+    `;
+
+  if (data.media_type === "image") {
+    content =
+      `<img src="${data.url}" alt="NASA APOD" class="nasa-image">` +
+      content;
+  } else {
+    content =
+      `<p>Today's APOD is a video:</p>
+       <a href="${data.url}" target="_blank" style="color:#6ab9ff;">Watch here</a>` +
+      content;
+  }
+
+  document.querySelector(".nasa-content").innerHTML = content;
+}
+
+loadNASAData();
+</script>
 
 </body>
 </html>
