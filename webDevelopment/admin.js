@@ -126,11 +126,26 @@ function capitalizeWords(str) {
       (i.name ?? "").toLowerCase().includes(search)
     );
 
-    // Category filter
-    const selectedCategory = categoryFilter?.value?.toLowerCase() || "";
-    if (selectedCategory) {
-      items = items.filter(i => i.categoryName === selectedCategory);
-    }
+// SORTING (newest, oldest, A–Z)
+const sortValue = categoryFilter?.value;
+
+if (sortValue === "newest") {
+  items.sort(
+    (a, b) => new Date(b.date_lost_found) - new Date(a.date_lost_found)
+  );
+}
+
+if (sortValue === "oldest") {
+  items.sort(
+    (a, b) => new Date(a.date_lost_found) - new Date(b.date_lost_found)
+  );
+}
+
+if (sortValue === "az") {
+  items.sort((a, b) =>
+    (a.name ?? "").localeCompare(b.name ?? "")
+  );
+}
 
     items.forEach(item => {
       const tr = document.createElement("tr");
