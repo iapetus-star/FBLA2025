@@ -129,15 +129,19 @@
 </footer>
 
 <script>
-  // Get the path the user tried to visit
-  const path = window.location.pathname.toLowerCase();
+// Get the path the user tried to visit (lowercase for comparison)
+const path = window.location.pathname.toLowerCase();
 
-  // If it's in /webDevelopment/, show GitHub default 404
-  if (path.startsWith('/webdevelopment/')) {
-    // Redirect to GitHub's default 404
-    window.location.href = "https://docs.github.com/en/pages/troubleshooting-custom-pages#user-content-pages-404";
-  }
-  // Otherwise, show Cosmic Classroom 404 (do nothing)
+// Check for webDevelopment subfolder (GitHub default 404)
+if (path.includes('/webdevelopment/')) {
+  window.location.href = "https://docs.github.com/en/pages/troubleshooting-custom-pages#user-content-pages-404";
+}
+
+// Check for WebDesign subfolder (show Cosmic Classroom 404)
+else if (path.includes('/webdesign/')) {
+  // do nothing, show this page
+}
+
 </script>
 
 </body>
