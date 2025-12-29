@@ -197,35 +197,35 @@
     <div class="resource-card">
       <h3>Solar System Guide</h3>
       <p>PDF cheat sheet covering all planets, moons, and interesting facts.</p>
-      <a class="btn" href="resources/solar-system.pdf" download>Download PDF</a>
+      <a class="btn" href="solar%20system%20guide.pdf" download onclick="markPdfComplete('pdf-solar-system')">Download PDF</a>
     </div>
 
 <!-- Resource 2 -->
     <div class="resource-card">
       <h3>Stars & Galaxies Notes</h3>
       <p>Summary of star life cycles and galaxy types for quick revision.</p>
-      <a class="btn" href="resources/stars-galaxies.pdf" download>Download PDF</a>
+      <a class="btn" href="stars-galaxies.pdf" download onclick="markPdfComplete('pdf-stars-galaxies')">Download PDF</a>
     </div>
 
 <!-- Resource 3 -->
     <div class="resource-card">
       <h3>Black Holes Explained</h3>
       <p>Easy-to-read notes with diagrams about black holes and event horizons.</p>
-      <a class="btn" href="resources/black-holes.pdf" download>Download PDF</a>
+      <a class="btn" href="black-holes.pdf" download onclick="markPdfComplete('pdf-black-holes')">Download PDF</a>
     </div>
 
 <!-- Resource 4 -->
     <div class="resource-card">
       <h3>Space Technology Overview</h3>
       <p>Slides and diagrams about rockets, satellites, and telescopes.</p>
-      <a class="btn" href="resources/space-tech.pdf" download>Download PDF</a>
+      <a class="btn" href="space-tech.pdf" download onclick="markPdfComplete('pdf-space-tech')">Download PDF</a>
     </div>
 
 <!-- Resource 5 -->
     <div class="resource-card">
       <h3>Exoplanets & Alien Worlds</h3>
       <p>Notes on exoplanets, detection methods, and interesting discoveries.</p>
-      <a class="btn" href="resources/exoplanets.pdf" download>Download PDF</a>
+      <a class="btn" href="exoplanets.pdf" download onclick="markPdfComplete('pdf-exoplanets')">Download PDF</a>
     </div>
 
   </div>
@@ -233,8 +233,22 @@
 
 <!-- Footer -->
 <footer>
-  Cosmic Classroom © 2025 — Built by Students, for Students
+  Cosmic Classroom © 2026 — Built by Students, for Students
 </footer>
+
+
+<script>
+function markPdfComplete(pdfId) {
+    let completedPdfs = JSON.parse(localStorage.getItem("completedPdfs") || "[]");
+
+    if (!completedPdfs.includes(pdfId)) {
+        completedPdfs.push(pdfId);
+        localStorage.setItem("completedPdfs", JSON.stringify(completedPdfs));
+        console.log("PDF marked complete:", pdfId);
+    }
+}
+</script>
 
 </body>
 </html>
+
