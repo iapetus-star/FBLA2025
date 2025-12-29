@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page Not Found | Cosmic Classroom</title>
+
+<style>
+  body {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    background: #0a0f24;
+    color: white;
+    overflow-x: hidden;
+  }
+
+  a {
+    text-decoration: none;
+    color: white;
+  }
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background: rgba(0,0,0,0.4);
+    backdrop-filter: blur(8px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  nav .logo {
+    font-size: 26px;
+    font-weight: 700;
+    color: #6ab9ff;
+  }
+
+  nav ul {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+  }
+
+  nav ul li a:hover {
+    color: #6ab9ff;
+  }
+
+  /* HERO */
+  .hero {
+    background: url('images/404-hero.jpg') center/cover no-repeat;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 60px;
+    box-shadow: inset 0 0 200px black;
+  }
+
+  .hero h1 {
+    font-size: 60px;
+    text-shadow: 0 0 20px black;
+  }
+
+  .hero p {
+    max-width: 520px;
+    font-size: 20px;
+    margin-top: 10px;
+    text-shadow: 0 0 10px black;
+    opacity: 0.9;
+  }
+
+  .hero .btn {
+    margin-top: 25px;
+    padding: 12px 25px;
+    background: #6ab9ff;
+    border-radius: 5px;
+    color: black;
+    font-weight: 600;
+    transition: 0.2s;
+    display: inline-block;
+  }
+
+  .hero .btn:hover {
+    background: white;
+  }
+
+  footer {
+    text-align: center;
+    padding: 40px;
+    background: #080b17;
+    font-size: 14px;
+    color: #8ca0c7;
+  }
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="logo">Cosmic Classroom</div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="dashboard.html">Dashboard</a></li>
+    <li><a href="lessons.html">Lessons</a></li>
+    <li><a href="videos.html">Videos</a></li>
+    <li><a href="quizzes.html">Quizzes</a></li>
+    <li><a href="study.html">Study Sessions</a></li>
+    <li><a href="resources.html">Resources</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>🗺️ Uncharted Territory</h1>
+  <p>
+    You’ve reached the edge of explored space.  
+    This area hasn’t been mapped yet —  
+    but more content is on the way.
+  </p>
+  <a href="index.html" class="btn">Back to Civilization</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  Cosmic Classroom © 2026 — Built by Students, for Students
+</footer>
+
+</body>
+</html>
