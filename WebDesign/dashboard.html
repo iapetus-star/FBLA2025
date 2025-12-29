@@ -9,9 +9,7 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
-/* ------------------------------
-   GLOBAL STYLES
------------------------------- */
+/*GLOBAL STYLES*/
 body {
     margin: 0;
     font-family: "Poppins", sans-serif;
@@ -42,9 +40,7 @@ body::before {
     50% { opacity: 0.5; }
 }
 
-/* ------------------------------
-   HEADER
------------------------------- */
+/*HEADER*/
 header {
     text-align: center;
     padding: 20px;
@@ -62,7 +58,6 @@ header {
     font-size: 0.9rem;
     opacity: 0.8;
 }
-
 
  /* NAVBAR */
   nav {
@@ -93,9 +88,7 @@ header {
     color: #6ab9ff;
   }
 
-/* ------------------------------
-   MAIN DASHBOARD LAYOUT
------------------------------- */
+/*MAIN DASHBOARD LAYOUT*/
 .dashboard-container {
     max-width: 1300px;
     margin: 0 auto;
@@ -107,9 +100,7 @@ header {
     gap: 25px;
 }
 
-/* ------------------------------
-   CARD GRID
------------------------------- */
+/*CARD GRID*/
 .item-cards {
     flex: 3;
     display: grid;
@@ -147,9 +138,7 @@ header {
     margin-bottom: 12px;
 }
 
-/* ------------------------------
-   PROGRESS BAR
------------------------------- */
+/*    PROGRESS BAR*/
 .progress-bar-container {
     background: #1a2340;
     border-radius: 10px;
@@ -165,9 +154,7 @@ header {
     transition: width 0.3s;
 }
 
-/* ------------------------------
-   COMPLETE BUTTON
------------------------------- */
+/*COMPLETE BUTTON*/
 .item-card button {
     margin-top: 12px;
     padding: 8px 14px;
@@ -185,9 +172,7 @@ header {
     text-decoration: line-through;
 }
 
-/* ------------------------------
-   SIDEBAR
------------------------------- */
+/*SIDEBAR*/
 .sidebar {
     flex: 1;
     background: #11172f;
@@ -201,9 +186,7 @@ header {
     color: #6ab9ff;
 }
 
-/* ------------------------------
-   BADGES
------------------------------- */
+/*BADGES*/
 #badge-container {
     display: flex;
     flex-wrap: wrap;
@@ -220,9 +203,7 @@ header {
     font-size: 1.2rem;
 }
 
-/* ------------------------------
-   NOTIFICATIONS
------------------------------- */
+/*NOTIFICATIONS*/
 #notifications {
     position: fixed;
     top: 20px;
@@ -275,32 +256,32 @@ header {
 
 <div class="dashboard-container">
 
-    <header>
-        <h1>Student Dashboard</h1>
-        <div class="level-xp">
-            <span id="level-display">Level: 1</span>
-            <span id="xp-display">XP: 0</span>
-            <span id="streak-display"></span>
-        </div>
-    </header>
-
-    <div class="main-content">
-
-        <!-- Card Grid -->
-        <div class="item-cards" id="item-cards">
-            <!-- Cards will be inserted by JS -->
-        </div>
-
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <h2>Analytics</h2>
-            <canvas id="completionChart"></canvas>
-
-            <h2 style="margin-top:30px;">Badges</h2>
-            <div id="badge-container"></div>
-        </aside>
-
+  <header>
+    <h1>Student Dashboard</h1>
+    <div class="level-xp">
+      <span id="level-display">Level: 1 </span>
+      <span id="xp-display">XP: 0</span>
+      <span id="streak-display"></span>
     </div>
+  </header>
+
+  <div class="main-content">
+
+<!-- Card Grid -->
+    <div class="item-cards" id="item-cards">
+<!-- Cards will be inserted by JS -->
+    </div>
+
+<!-- Sidebar -->
+    <aside class="sidebar">
+    <h2>Analytics</h2>
+      <canvas id="completionChart"></canvas>
+
+    <h2 style="margin-top:30px;">Badges</h2>
+      <div id="badge-container"></div>
+    </aside>
+
+  </div>
 </div>
 
 <!-- Notification Container -->
@@ -338,48 +319,88 @@ const ITEMS = {
         }
     },
 
-    videos: {
-        "video-black-holes": {
-            title: "Black Holes Videos",
-            xp: 20,
-            type: "Video"
-        },
-        "video-solar-system": {
-            title: "Solar System Videos",
-            xp: 15,
-            type: "Video"
-        }
+videos: {
+    "libKVRa01L8": {
+        title: "The Solar System Explained",
+        xp: 15,
+        type: "Video"
     },
-
-    pdfs: {
-        "pdf-black-holes": {
-            title: "Black Holes PDF",
-            xp: 15,
-            type: "PDF"
-        },
-        "pdf-solar-system": {
-            title: "Solar System PDF",
-            xp: 10,
-            type: "PDF"
-        }
+    "PM9CQDlQI0A": {
+        title: "Stars & Their Life Cycle",
+        xp: 15,
+        type: "Video"
+    },
+    "nJ4d4QEDOYM": {
+        title: "Black Holes Explained",
+        xp: 20,
+        type: "Video"
+    },
+    "68PlPkeOwng": {
+        title: "Space Technology & Exploration",
+        xp: 20,
+        type: "Video"
+    },
+    "937stSQMr64": {
+        title: "Galaxies of the Universe",
+        xp: 15,
+        type: "Video"
+    },
+    "02wrLS-ue1Q": {
+        title: "Comets & Asteroids",
+        xp: 10,
+        type: "Video"
+    },
+    "HTHj_pvEYYE": {
+        title: "Exoplanets & Alien Worlds",
+        xp: 20,
+        type: "Video"
     }
+},
+
+pdfs: {
+    "pdf-solar-system": {
+        title: "Solar System Guide",
+        xp: 10,
+        type: "PDF"
+    },
+    "pdf-stars-galaxies": {
+        title: "Stars & Galaxies Notes",
+        xp: 15,
+        type: "PDF"
+    },
+    "pdf-black-holes": {
+        title: "Black Holes Explained",
+        xp: 15,
+        type: "PDF"
+    },
+    "pdf-space-tech": {
+        title: "Space Technology Overview",
+        xp: 20,
+        type: "PDF"
+    },
+    "pdf-exoplanets": {
+        title: "Exoplanets & Alien Worlds",
+        xp: 15,
+        type: "PDF"
+    }
+}
 };
 
 // STORAGE READERS
 function readLessons() {
-    return JSON.parse(localStorage.getItem("dashboardData") || "{}");
+  return JSON.parse(localStorage.getItem("dashboardData") || "{}");
 }
 
 function readQuizzes() {
-    return JSON.parse(localStorage.getItem("quizResults") || "{}");
+  return JSON.parse(localStorage.getItem("quizResults") || "{}");
 }
 
 function readPdfs() {
-    return JSON.parse(localStorage.getItem("completedPdfs") || "[]");
+  return JSON.parse(localStorage.getItem("completedPdfs") || "[]");
 }
 
 function readVideos() {
-    return JSON.parse(localStorage.getItem("completedVideos") || "[]");
+  return JSON.parse(localStorage.getItem("completedVideos") || "[]");
 }
 
 // XP, LEVEL, BADGES, STREAK
@@ -390,9 +411,9 @@ const LEVELS = [0, 50, 120, 220, 350, 500];
 
 // Badges
 const BADGES = [
-    { id: "beginner", threshold: 1, icon: "🌟", name: "Initiate" },
-    { id: "explorer", threshold: 4, icon: "🪐", name: "Explorer" },
-    { id: "master", threshold: 8, icon: "🚀", name: "Cosmic Master" }
+  { id: "beginner", threshold: 1, icon: "🌟", name: "Initiate" },
+  { id: "explorer", threshold: 4, icon: "🪐", name: "Explorer" },
+  { id: "master", threshold: 8, icon: "🚀", name: "Cosmic Master" }
 ];
 let earnedBadges = JSON.parse(localStorage.getItem("earnedBadges") || "[]");
 
@@ -402,8 +423,8 @@ let lastDate = localStorage.getItem("lastCompletionDate");
 
 // NOTIFICATIONS
 function notify(text) {
-    const box = document.getElementById("notifications");
-    const el = document.createElement("div");
+  const box = document.getElementById("notifications");
+  const el = document.createElement("div");
     el.className = "notification";
     el.textContent = text;
     box.appendChild(el);
@@ -413,253 +434,253 @@ function notify(text) {
 // COMPLETION HANDLING
 function saveCompletion(itemId) {
     // LESSONS
-    let lessons = readLessons();
-    if (ITEMS.lessons[itemId]) {
-        if (!lessons[itemId]?.completed) {
-            lessons[itemId] = { completed: true };
-            localStorage.setItem("dashboardData", JSON.stringify(lessons));
-        }
-        return;
+  let lessons = readLessons();
+  if (ITEMS.lessons[itemId]) {
+    if (!lessons[itemId]?.completed) {
+      lessons[itemId] = { completed: true };
+      localStorage.setItem("dashboardData", JSON.stringify(lessons));
     }
+    return;
+  }
 
-    // QUIZZES
-    let quizzes = readQuizzes();
-    if (ITEMS.quizzes[itemId]) {
-        if (!quizzes[itemId]) {
-            quizzes[itemId] = {
-                score: ITEMS.quizzes[itemId].xp, // assume full XP if marked manually
-                completed: true,
-                date: new Date().toISOString()
-            };
-            localStorage.setItem("quizResults", JSON.stringify(quizzes));
-        }
-        return;
+// QUIZZES
+  let quizzes = readQuizzes();
+  if (ITEMS.quizzes[itemId]) {
+    if (!quizzes[itemId]) {
+      quizzes[itemId] = {
+        score: ITEMS.quizzes[itemId].xp, // assume full XP if marked manually
+        completed: true,
+        date: new Date().toISOString()
+      };
+      localStorage.setItem("quizResults", JSON.stringify(quizzes));
     }
+    return;
+  }
 
-    // PDFs
-    let pdfs = readPdfs();
-    if (ITEMS.pdfs[itemId] && !pdfs.includes(itemId)) {
-        pdfs.push(itemId);
-        localStorage.setItem("completedPdfs", JSON.stringify(pdfs));
-        return;
-    }
+// PDFs
+  let pdfs = readPdfs();
+  if (ITEMS.pdfs[itemId] && !pdfs.includes(itemId)) {
+    pdfs.push(itemId);
+    localStorage.setItem("completedPdfs", JSON.stringify(pdfs));
+    return;
+  }
 
-    // VIDEOS
-    let videos = readVideos();
-    if (ITEMS.videos[itemId] && !videos.includes(itemId)) {
-        videos.push(itemId);
-        localStorage.setItem("completedVideos", JSON.stringify(videos));
-        return;
-    }
+// VIDEOS
+  let videos = readVideos();
+  if (ITEMS.videos[itemId] && !videos.includes(itemId)) {
+    videos.push(itemId);
+    localStorage.setItem("completedVideos", JSON.stringify(videos));
+    return;
+  }
 }
 
 function handleCompletion(itemId, itemData, button, progressBar) {
-    // Prevent double-complete
-    if (button.classList.contains("completed")) return;
+// Prevent double-complete
+  if (button.classList.contains("completed")) return;
 
-    // Save completion to localStorage
-    saveCompletion(itemId);
+// Save completion to localStorage
+  saveCompletion(itemId);
 
-    // XP
-    totalXP += itemData.xp;
-    localStorage.setItem("totalXP", totalXP);
+// XP
+  totalXP += itemData.xp;
+  localStorage.setItem("totalXP", totalXP);
 
-    // Streak update
-    updateStreak();
+// Streak update
+  updateStreak();
 
-    // Badges
-    updateBadges();
+// Badges
+  updateBadges();
 
-    // Notify
-    notify(`${itemData.title} completed! +${itemData.xp} XP`);
+// Notify
+  notify(`${itemData.title} completed! +${itemData.xp} XP`);
 
-    // Visuals
-    button.textContent = "Completed";
-    button.classList.add("completed");
-    progressBar.style.width = "100%";
+// Visuals
+  button.textContent = "Completed";
+  button.classList.add("completed");
+  progressBar.style.width = "100%";
 
-    // Update level and chart
-    updateLevelDisplay();
-    updateCompletionChart();
+// Update level and chart
+  updateLevelDisplay();
+  updateCompletionChart();
 }
 
 // STREAK UPDATE
 function updateStreak() {
-    const today = new Date().toDateString();
+  const today = new Date().toDateString();
 
-    if (lastDate !== today) {
-        streak++;
-        localStorage.setItem("streak", streak);
-        localStorage.setItem("lastCompletionDate", today);
-        notify(`🔥 Streak: ${streak} day(s)!`);
-    }
+  if (lastDate !== today) {
+    streak++;
+    localStorage.setItem("streak", streak);
+    localStorage.setItem("lastCompletionDate", today);
+    notify(`🔥 Streak: ${streak} day(s)!`);
+  }
 }
 
 // BADGE UPDATE
 function updateBadges() {
-    const completedCount = getTotalCompleted();
+  const completedCount = getTotalCompleted();
 
-    BADGES.forEach(b => {
-        if (completedCount >= b.threshold && !earnedBadges.includes(b.id)) {
-            earnedBadges.push(b.id);
-            localStorage.setItem("earnedBadges", JSON.stringify(earnedBadges));
-            notify(`Badge earned: ${b.name} ${b.icon}`);
-        }
-    });
+  BADGES.forEach(b => {
+    if (completedCount >= b.threshold && !earnedBadges.includes(b.id)) {
+      earnedBadges.push(b.id);
+      localStorage.setItem("earnedBadges", JSON.stringify(earnedBadges));
+      notify(`Badge earned: ${b.name} ${b.icon}`);
+    }
+  });
 }
 
 function renderBadges() {
-    const box = document.getElementById("badge-container");
-    box.innerHTML = "";
+  const box = document.getElementById("badge-container");
+  box.innerHTML = "";
 
-    earnedBadges.forEach(id => {
-        const b = BADGES.find(x => x.id === id);
-        let el = document.createElement("div");
-        el.className = "badge";
-        el.textContent = `${b.icon} ${b.name}`;
-        box.appendChild(el);
-    });
+  earnedBadges.forEach(id => {
+    const b = BADGES.find(x => x.id === id);
+    let el = document.createElement("div");
+    el.className = "badge";
+    el.textContent = `${b.icon} ${b.name}`;
+    box.appendChild(el);
+  });
 }
 
 // LEVEL DISPLAY
 function updateLevelDisplay() {
-    const level = LEVELS.filter(x => totalXP >= x).length;
-    document.getElementById("level-display").textContent = `Level: ${level}`;
-    document.getElementById("xp-display").textContent = `XP: ${totalXP}`;
-    document.getElementById("streak-display").textContent = `Streak: ${streak} days`;
+  const level = LEVELS.filter(x => totalXP >= x).length;
+  document.getElementById("level-display").textContent = `Level: ${level}`;
+  document.getElementById("xp-display").textContent = `XP: ${totalXP}`;
+  document.getElementById("streak-display").textContent = `Streak: ${streak} days`;
 }
 
 //BUILD ITEM CARDS
 function buildDashboard() {
-    const container = document.getElementById("item-cards");
-    container.innerHTML = "";
+  const container = document.getElementById("item-cards");
+  container.innerHTML = "";
 
-    const lessonData = readLessons();
-    const quizData = readQuizzes();
-    const pdfData = readPdfs();
-    const videoData = readVideos();
+  const lessonData = readLessons();
+  const quizData = readQuizzes();
+  const pdfData = readPdfs();
+  const videoData = readVideos();
 
-    // LOOP ALL DEFINED ITEMS
-    Object.entries(ITEMS).forEach(([category, entries]) => {
-        Object.entries(entries).forEach(([id, data]) => {
-            const card = document.createElement("div");
-            card.className = "item-card";
-            card.dataset.id = id;
+// LOOP ALL DEFINED ITEMS
+  Object.entries(ITEMS).forEach(([category, entries]) => {
+    Object.entries(entries).forEach(([id, data]) => {
+      const card = document.createElement("div");
+      card.className = "item-card";
+      card.dataset.id = id;
 
-            // Determine if completed
-            const completed =
-                (category === "lessons" && lessonData[id]?.completed) ||
-                (category === "quizzes" && quizData[id]) ||
-                (category === "pdfs" && pdfData.includes(id)) ||
-                (category === "videos" && videoData.includes(id));
+// Determine if completed
+      const completed =
+        (category === "lessons" && lessonData[id]?.completed) ||
+        (category === "quizzes" && quizData[id]) ||
+        (category === "pdfs" && pdfData.includes(id)) ||
+        (category === "videos" && videoData.includes(id));
 
-            // Additional info for quizzes
-            let detailsHTML = "";
-            if (category === "quizzes" && quizData[id]) {
-                const q = quizData[id];
-                detailsHTML = `
-                    <p>Score: ${q.score} / ${q.totalQuestions || "?"}</p>
-                    <p>Difficulty: ${q.difficulty || "N/A"}</p>
-                    <p>Time Remaining: ${q.timeRemaining != null ? q.timeRemaining + "s" : "N/A"}</p>
-                    <p>Completed: ${q.date ? new Date(q.date).toLocaleString() : "N/A"}</p>
-                `;
-            }
+// Additional info for quizzes
+      let detailsHTML = "";
+      if (category === "quizzes" && quizData[id]) {
+        const q = quizData[id];
+        detailsHTML = `
+          <p>Score: ${q.score} / ${q.totalQuestions || "?"}</p>
+          <p>Difficulty: ${q.difficulty || "N/A"}</p>
+          <p>Time Remaining: ${q.timeRemaining != null ? q.timeRemaining + "s" : "N/A"}</p>
+          <p>Completed: ${q.date ? new Date(q.date).toLocaleString() : "N/A"}</p>
+        `;
+      }
 
-            // Optionally show completion date for lessons, videos, PDFs
-            if (category === "lessons" && lessonData[id]?.completed) {
-                detailsHTML += `<p>Completed: ${lessonData[id].date ? new Date(lessonData[id].date).toLocaleString() : "N/A"}</p>`;
-            }
+// Optionally show completion date for lessons, videos, PDFs
+      if (category === "lessons" && lessonData[id]?.completed) {
+        detailsHTML += `<p>Completed: ${lessonData[id].date ? new Date(lessonData[id].date).toLocaleString() : "N/A"}</p>`;
+      }
 
-            card.innerHTML = `
-                <h3>${data.title}</h3>
-                <div class="item-type">${data.type}</div>
-                <div class="item-xp">XP: ${data.xp}</div>
-                ${detailsHTML}
-                <div class="progress-bar-container">
-                    <div class="progress-bar" id="bar-${id}" style="width:${completed ? "100%" : "0%"}"></div>
-                </div>
-                <button id="btn-${id}" class="${completed ? "completed" : ""}">
-                    ${completed ? "Completed" : "Mark Completed"}
-                </button>
-            `;
+      card.innerHTML = `
+        <h3>${data.title}</h3>
+        <div class="item-type">${data.type}</div>
+        <div class="item-xp">XP: ${data.xp}</div>
+        ${detailsHTML}
+          <div class="progress-bar-container">
+          <div class="progress-bar" id="bar-${id}" style="width:${completed ? "100%" : "0%"}"></div>
+        </div>
+        <button id="btn-${id}" class="${completed ? "completed" : ""}">
+          ${completed ? "Completed" : "Mark Completed"}
+        </button>
+      `;
 
-            container.appendChild(card);
+      container.appendChild(card);
 
-            const btn = card.querySelector("button");
-            const bar = card.querySelector(".progress-bar");
+      const btn = card.querySelector("button");
+      const bar = card.querySelector(".progress-bar");
 
-            btn.addEventListener("click", () => handleCompletion(id, data, btn, bar));
-        });
+      btn.addEventListener("click", () => handleCompletion(id, data, btn, bar));
     });
+  });
 }
 
 // CHART.JS ANALYTICS
 let completionChart = null;
 
 function getTotalCompleted() {
-    const lessons = readLessons();
-    const quizzes = readQuizzes();
-    const pdfs = readPdfs();
-    const videos = readVideos();
+  const lessons = readLessons();
+  const quizzes = readQuizzes();
+  const pdfs = readPdfs();
+  const videos = readVideos();
 
-    let completed = 0;
+  let completed = 0;
 
-    // Lessons
-    completed += Object.values(lessons).filter(x => x.completed).length;
+// Lessons
+  completed += Object.values(lessons).filter(x => x.completed).length;
 
-    // Quizzes
-    completed += Object.values(quizzes).length;
+// Quizzes
+  completed += Object.values(quizzes).length;
 
-    // PDFs
-    completed += pdfs.length;
+// PDFs
+  completed += pdfs.length;
 
-    // Videos
-    completed += videos.length;
+// Videos
+  completed += videos.length;
 
-    return completed;
+  return completed;
 }
 
 function updateCompletionChart() {
-    const completed = getTotalCompleted();
-    const total = Object.values(ITEMS).reduce(
-        (sum, group) => sum + Object.keys(group).length,
-        0
-    );
+  const completed = getTotalCompleted();
+  const total = Object.values(ITEMS).reduce(
+  (sum, group) => sum + Object.keys(group).length,
+    0
+  );
 
-    completionChart.data.datasets[0].data = [
-        completed,
-        total - completed
-    ];
-    completionChart.update();
+  completionChart.data.datasets[0].data = [
+    completed,
+  total - completed
+  ];
+  completionChart.update();
 }
 
 function initChart() {
-    const ctx = document.getElementById("completionChart").getContext("2d");
+  const ctx = document.getElementById("completionChart").getContext("2d");
 
-    completionChart = new Chart(ctx, {
-        type: "doughnut",
-        data: {
-            labels: ["Completed", "Remaining"],
-            datasets: [{
-                data: [0, 1],
-                backgroundColor: ["#6ab9ff", "#1a2340"]
-            }]
-        },
-        options: {
-            plugins: {
-                legend: { labels: { color: "white" } }
-            }
-        }
-    });
+  completionChart = new Chart(ctx, {
+    type: "doughnut",
+    data: {
+      labels: ["Completed", "Remaining"],
+      datasets: [{
+        data: [0, 1],
+    backgroundColor: ["#6ab9ff", "#1a2340"]
+      }]
+    },
+    options: {
+      plugins: {
+        legend: { labels: { color: "white" } }
+      }
+    }
+  });
 
-    updateCompletionChart();
+  updateCompletionChart();
 }
 
 function initDashboard() {
-    buildDashboard();
-    updateLevelDisplay();
-    renderBadges();
-    initChart();
+  buildDashboard();
+  updateLevelDisplay();
+  renderBadges();
+  initChart();
 }
 
 document.addEventListener("DOMContentLoaded", initDashboard);
