@@ -7,6 +7,10 @@
 
 <style>
  /* GLOBAL STYLES */
+* {
+  box-sizing: border-box;
+}
+
   body {
     margin: 0;
     font-family: "Poppins", sans-serif;
@@ -168,6 +172,91 @@
     color: #8ca0c7;
   }
 
+/*MOBILE RESPONSIVE STYLES*/
+@media (max-width: 768px) {
+
+  /* BODY */
+  body {
+    font-size: 16px;
+  }
+
+  /* NAVBAR */
+  nav {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px 20px;
+  }
+
+  nav .logo {
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+
+  nav ul {
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 0;
+  }
+
+  nav ul li {
+    font-size: 14px;
+  }
+
+  /* HERO SECTION */
+  .hero {
+    height: auto;
+    padding: 60px 20px;
+    text-align: center;
+    align-items: center;
+  }
+
+  .hero h1 {
+    font-size: 36px;
+  }
+
+  .hero p {
+    font-size: 16px;
+    max-width: 100%;
+  }
+
+  .hero .btn {
+    padding: 14px 30px;
+    font-size: 16px;
+  }
+
+  /* SECTIONS */
+  .section {
+    padding: 40px 20px;
+  }
+
+  /* CARDS */
+  .card {
+    padding: 20px;
+  }
+
+  .card h3 {
+    font-size: 18px;
+  }
+
+  /* NASA CARD */
+  .nasa-card {
+    padding: 20px;
+  }
+
+  .nasa-title {
+    font-size: 18px;
+  }
+
+  .nasa-description {
+    font-size: 15px;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 30px 20px;
+    font-size: 13px;
+  }
+}
 
 </style>
 
@@ -312,4 +401,5 @@ loadNASAData();
 
 </body>
 </html>
+
 
