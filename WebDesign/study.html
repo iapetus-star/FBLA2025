@@ -161,6 +161,113 @@
     }
   }
 
+/*MOBILE RESPONSIVENESS */
+
+/* Tablets & smaller */
+@media (max-width: 900px) {
+  nav {
+    padding: 15px 25px;
+  }
+
+  nav ul {
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .hero {
+    padding-left: 40px;
+    height: auto;
+  }
+
+  .hero h1 {
+    font-size: 42px;
+  }
+
+  .hero p {
+    font-size: 18px;
+    max-width: 500px;
+  }
+
+  .section {
+    padding: 50px 30px;
+  }
+}
+
+/* Phones */
+@media (max-width: 600px) {
+  /* NAVBAR */
+  nav {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 12px;
+    padding: 0;
+  }
+
+  nav .logo {
+    font-size: 22px;
+  }
+
+  /* HERO */
+  .hero {
+    padding: 20px;
+    text-align: center;
+    align-items: center;
+  }
+
+  .hero h1 {
+    font-size: 32px;
+  }
+
+  .hero p {
+    font-size: 16px;
+  }
+
+  /* SECTION */
+  .section {
+    padding: 40px 20px;
+  }
+
+  .section h2 {
+    font-size: 26px;
+  }
+
+  /* SESSION GRID */
+  .session-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .session-card {
+    padding: 18px;
+  }
+
+  .session-card h3 {
+    font-size: 18px;
+  }
+
+  .session-card p {
+    font-size: 15px;
+  }
+
+  .session-card .btn {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 25px 15px;
+    font-size: 12px;
+  }
+}
+
 </style>
 
 </head>
@@ -253,4 +360,3 @@
 
 </body>
 </html>
-
