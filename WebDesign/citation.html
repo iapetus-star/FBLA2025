@@ -116,6 +116,113 @@
     color: #8ca0c7;
   }
 
+/*MOBILE RESPONSIVENESS*/
+
+/* Tablets & smaller */
+@media (max-width: 900px) {
+  nav {
+    padding: 15px 25px;
+  }
+
+  nav ul {
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .hero {
+    padding-left: 40px;
+    height: auto;
+  }
+
+  h1 {
+    font-size: 42px;
+  }
+
+  h2 {
+    font-size: 32px;
+  }
+
+  .container {
+    padding: 25px;
+    margin: 40px 20px;
+  }
+
+  .credit-section {
+    gap: 12px;
+  }
+
+  .credit-icon {
+    font-size: 22px;
+  }
+
+  .credit-content {
+    font-size: 15px;
+  }
+}
+
+/* Phones */
+@media (max-width: 600px) {
+  /* NAVBAR */
+  nav {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 15px;
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 10px;
+    padding: 0;
+  }
+
+  nav .logo {
+    font-size: 22px;
+  }
+
+  /* HERO */
+  .hero {
+    padding: 20px;
+    text-align: center;
+    align-items: center;
+  }
+
+  h1 {
+    font-size: 28px;
+  }
+
+  h2 {
+    font-size: 22px;
+  }
+
+  /* CONTAINER */
+  .container {
+    padding: 20px;
+    margin: 30px 15px;
+  }
+
+  .credit-section {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .credit-icon {
+    font-size: 20px;
+  }
+
+  .credit-content {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 25px 15px;
+    font-size: 12px;
+  }
+}
 
 </style>
 <!-- For icons -->
