@@ -236,6 +236,130 @@ header {
     }
 }
 
+/* MOBILE & TABLET SUPPORT*/
+/* Tablets & below */
+@media (max-width: 1024px) {
+  .main-content {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    order: -1; /* Sidebar moves to top */
+  }
+}
+
+/* Phones */
+@media (max-width: 768px) {
+
+/* NAVBAR */
+  nav {
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px 20px;
+  }
+
+  nav ul {
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+    gap: 15px;
+    padding: 0;
+  }
+
+  nav ul li {
+    width: 100%;
+  }
+
+  nav .logo {
+    font-size: 22px;
+  }
+
+/* HEADER */
+  header {
+      padding: 15px;
+  }
+
+/* DASHBOARD */
+  .dashboard-container {
+    padding: 15px;
+  }
+
+  .main-content {
+    gap: 20px;
+  }
+
+/* CARDS */
+  .item-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .item-card {
+    padding: 16px;
+  }
+
+  .item-card h3 {
+    font-size: 1.1rem;
+  word-wrap: break-word;
+  }
+
+/* BUTTONS */
+  .item-card button {
+    width: 100%;
+    padding: 10px;
+    font-size: 0.95rem;
+    min-height: 44px;
+  }
+
+/* SIDEBAR */
+  .sidebar {
+    padding: 16px;
+  }
+
+  .sidebar h2 {
+    margin-top: 20px;
+  }
+
+  .sidebar canvas {
+    max-height: 220px;
+  }
+
+/* BADGES */
+  .badge {
+    font-size: 1rem;
+    padding: 6px 10px;
+  }
+
+/* NOTIFICATIONS */
+  #notifications {
+    right: 10px;
+    left: 10px;
+  }
+
+  .notification {
+    transform: translateY(-20px);
+  }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+
+  body {
+    font-size: 14px;
+  }
+
+  nav .logo {
+    font-size: 20px;
+  }
+
+  .level-xp {
+    font-size: 0.9rem;
+  }
+
+  #streak-display {
+    font-size: 0.8rem;
+  }
+}
+
 </style>
 </head>
 <body>
