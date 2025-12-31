@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+			<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -10,21 +10,45 @@
   body.high-contrast {
     background: white !important;
     color: black !important;
+  min-height: 100vh;
   }
 
 /* Remove starry background */
   body.high-contrast .stars {
     display: none !important;
+  background: none !important;
   }
+
+/* Removes card styling */
+body.high-contrast #start-screen,
+body.high-contrast .quiz-container,
+body.high-contrast #score-container {
+  margin: 0 !important;
+  width: 100% !important;
+  min-height: calc(100vh - 70px); /* navbar height */
+}
 
 /* Containers */
   body.high-contrast #start-screen,
 body.high-contrast .quiz-container,
+body.high-contrast #quiz-area,
 body.high-contrast #score-container {
     background: white !important;
     color: black !important;
     box-shadow: none !important;
+  max-width: none !important;
   }
+
+/* Navbar */
+body.high-contrast nav {
+  background: white !important;
+  color: black !important;
+  box-shadow: none !important;
+}
+
+body.high-contrast nav a {
+  color: black !important;
+}
 
 /* Buttons */
   body.high-contrast button,
