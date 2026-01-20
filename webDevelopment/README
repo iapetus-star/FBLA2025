@@ -1,0 +1,57 @@
+ Project Documentation – Lost and Found Website
+
+
+ Project Overview
+
+This project is a Lost and Found website developed for FBLA's Website Coding & Development event. The purpose of the website is to provide a simple and organized platform where users can report lost items and browse items that have been found. The site focuses on usability, clarity, and responsible handling of usersubmitted information.
+
+The project was designed and built from scratch by the developer, with an emphasis on originality and fair use of resources.
+
+
+ Code and Development
+
+All frontend and backend code for this project was written entirely by the project author. This includes:
+
+ Website structure and layout
+ Styling and visual design
+ Clientside logic and functionality
+ Backend logic and database interactions
+
+No code templates, starter projects, or copied source code were used. Any problems encountered during development were solved independently through testing, debugging, and original implementation.
+
+
+ Backend and Database
+
+The backend functionality of the website is powered by Supabase. Supabase is used to handle database storage, authentication and backend services required for the website to function properly.
+
+Supabase is used strictly as a backend service provider. All database structure, queries, and application logic interacting with Supabase were designed and written by the project author.
+
+Supabase is an external platform and is credited here as the backend service used to support the project.
+
+
+ Content
+
+All written content displayed on the website, including headings, descriptions, labels, and instructions, was created by the project author. No text was copied or adapted from external websites, articles, or documentation.
+
+
+ Images and Media
+
+All images used on the website are original. No stock images, copyrighted images, or media sourced from the internet were used in this project.
+
+The images are used solely for the purpose of demonstrating functionality and design within the Lost and Found website.
+
+
+ Fonts and Styling
+
+The website uses standard websafe or system fonts and custom styling written by the project author. No premium or copyrighted fonts were used without permission.
+
+
+ External Resources
+
+Aside from Supabase as a backend service, no external APIs, thirdparty services, datasets, stock images, or external content sources were used in this project.
+
+
+ Originality Statement
+
+This project is entirely original. All code, content, images, and design elements were created by the project author unless explicitly stated otherwise. The project complies with the coding event’s rules regarding originality, attribution, and ethical use of resources.
+
